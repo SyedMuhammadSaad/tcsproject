@@ -10,9 +10,15 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        
+        <p>Which Field you want to get access to:</p>
+        <br>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <button name="buttonchoice" value="teacher" type="submit">Teacher</button>
+            <button name="buttonchoice" value="student" type="submit">Student</button>
+            <button name="buttonchoice" value="course" type="submit">Course</button>
+        </form>
         <?php
-        // put your code here
+        $buttonvalue=$_POST["buttonchoice"];
         ?>
     </body>
 </html>
