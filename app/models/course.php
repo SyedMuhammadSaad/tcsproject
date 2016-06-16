@@ -2,11 +2,15 @@
 /**
  * course.php creates CourseModel class and has functions of CRUD
  */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * Include Database.php
  */
-include_once '../../core/models/database/database.php';
+require_once $_SESSION['Root'].'\core\models\database\database.php';
 
 /**
  * CourseModel class connects with database and executes commands from functions
@@ -66,10 +70,11 @@ class CourseModel
     }
     /**
      * Calls function of selecttable from database to read all courses
+     * @return array Returning array of table values
      */
     public function readCourseRow()
     {
-        DBAL::selecttable("course");
+        return DBAL::selecttable("course");
     }
     /**
      * Updates the course information

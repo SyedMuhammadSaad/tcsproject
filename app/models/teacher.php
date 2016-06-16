@@ -2,11 +2,15 @@
 /**
  * teacher.php creates TeacherModel class and has functions of CRUD
  */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * Include Database.php
  */
-include_once '../../core/models/database/database.php';
+require_once $_SESSION['Root'].'\core\models\database\database.php';
 
 /**
  * TeacherModel class connects with database and executes commands from functions
@@ -85,10 +89,11 @@ class TeacherModel
     }
     /**
      * Calls function of selecttable from database to read all teachers
+     * @return array Returning array of table values
      */
     public function readTeacherRow()
     {
-        DBAL::selecttable("teacher");
+        return DBAL::selecttable("teacher");
     }
     /**
      * Updates the teaher information

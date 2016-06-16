@@ -1,0 +1,21 @@
+<?php
+/**
+ * Teacher list.php file
+ */
+
+/**
+ * Including files
+ */
+include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\teacherController.php';
+/**
+ * listing the elements in teacher table.
+ * @param teacherController $obj Object made so function can be used
+ */
+function listTeacher($obj)
+{
+    $obj->readTeacher();
+}
+
+?>
+
+

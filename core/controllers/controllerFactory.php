@@ -3,15 +3,21 @@
  * Controller Factory implemented here. Making objects according to input.
  */
 
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * Including files so controller can select which class to return
  */
-include_once '../../app/controllers/teacherController.php';
-include_once '../../app/controllers/studentController.php';
-include_once '../../app/controllers/courseController.php';
+require_once $_SESSION['Root'].'\app\controllers\teacherController.php';
+require_once $_SESSION['Root'].'\app\controllers\studentController.php';
+require_once $_SESSION['Root'].'\app\controllers\courseController.php';
 
-
+/**
+ * ControllerFactory make the controller according to the parameter passed
+ */
 class ControllerFactory
 {
     /**

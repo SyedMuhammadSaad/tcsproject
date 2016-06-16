@@ -1,7 +1,21 @@
 <?php
+/**
+ * Student list.php file
+ */
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\studentController.php';
-
+/**
+ * Including files
+ */
+include_once $_SESSION['Root'].'\app\controllers\studentController.php';
+/**
+ * listing the elements in student table.
+ * @param studentController $obj Object made so function can be used
+ */
 function listStudent($obj)
 {
     $obj->readStudent();

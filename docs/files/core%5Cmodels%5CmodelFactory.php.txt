@@ -1,0 +1,45 @@
+<?php
+/**
+ * modelFactory makes the model from course,student or teacher
+ */
+
+/**
+ * Including the models
+ */
+include_once 'C:\xampp\htdocs\TCS_Project\app\models\course.php';
+include_once 'C:\xampp\htdocs\TCS_Project\app\models\student.php';
+include_once 'C:\xampp\htdocs\TCS_Project\app\models\teacher.php';
+
+/**
+ * ModelFactory making the model according to they typeofModel passed.
+ */
+class ModelFactory
+{
+    /**
+     * Factory method of model return model
+     * @param string $type $type is passed to createModel factory to return model
+     * @return string|\StudentModel|\TeacherModel|\CourseModel
+     */
+    public static function createModel($type)
+    {
+        if($type==="teacher")
+        {
+            return new TeacherModel;
+        }
+        else if($type==="student")
+        {
+            return new StudentModel;
+        }
+        else if($type==="course")
+        {
+            return new CourseModel;
+        }
+        else
+        {
+            return "Wrong model selected";
+        }
+    }
+}
+
+?>
+

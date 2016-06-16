@@ -1,9 +1,20 @@
 <?php
+/**
+ * Teacher edit.php file
+ */
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\teacherController.php';
-include_once 'C:\xampp\htdocs\TCS_Project\core\models\modelFactory.php';
-include_once 'C:\xampp\htdocs\TCS_Project\app\views\layouts\default.php';
-
+/**
+ * Including files
+ */
+include_once $_SESSION['Root'].'\app\controllers\teacherController.php';
+include_once $_SESSION['Root'].'\core\models\modelFactory.php';
+include_once $_SESSION['Root'].'\app\views\layouts\default.php';
+//making form and taking values
 echo '<form action="#" method="post">
         Column: <br>
                 <input type="radio" name="set" value="Name"> Name<br>

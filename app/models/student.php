@@ -2,11 +2,15 @@
 /**
  * student.php creates StudentModel class and has functions of CRUD
  */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * Include Database.php
  */
-include_once '../../core/models/database/database.php';
+require_once $_SESSION['Root'].'\core\models\database\database.php';
 
 /**
  * StudentModel class connects with database and executes commands from functions
@@ -85,10 +89,11 @@ class StudentModel
     }
     /**
      * Calls function of selecttable from database to read all students
+     * @return array Returning array of table values
      */
     public function readStudentRow()
     {
-        DBAL::selecttable("student");
+        return DBAL::selecttable("student");
     }
     /**
      * Updates the student information

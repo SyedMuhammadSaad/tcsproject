@@ -1,0 +1,19 @@
+<?php
+/**
+ * Course list.php file
+ */
+
+/**
+ * Including files
+ */
+include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\courseController.php';
+/**
+ * listing the elements in course table.
+ * @param courseController $obj Object made so function can be used
+ */
+function listCourse($obj)
+{
+    $obj->readCourse();
+}
+
+?>

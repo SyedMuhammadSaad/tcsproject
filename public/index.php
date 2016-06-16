@@ -11,10 +11,23 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        /**
+         * index file calling default.php
+         */
+        define('Root_dir',__DIR__);
         
-        include_once '../app/views/layouts/default.php';
-        echo $buttonvalue;
+        /**
+         * Including files
+         */
+        if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
+        $str=Root_dir;
+        $str=  rtrim($str,'\public');
+        $_SESSION['Root']=$str;
         
+        include_once $_SESSION['Root'].'/app/views/layouts/default.php';
         ?>
     </body>
 </html>

@@ -1,9 +1,20 @@
 <?php
+/**
+ * Teacher edit.php file
+ */
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\teacherController.php';
-include_once 'C:\xampp\htdocs\TCS_Project\core\models\modelFactory.php';
-include_once 'C:\xampp\htdocs\TCS_Project\app\views\layouts\default.php';
-
+/**
+ * Including files
+ */
+include_once $_SESSION['Root'].'\app\controllers\teacherController.php';
+include_once $_SESSION['Root'].'\core\models\modelFactory.php';
+include_once $_SESSION['Root'].'\app\views\layouts\default.php';
+//making form and taking values
 echo '<form action="#" method="post">
         Column: <br>
                 <input type="radio" name="set" value="Name"> Name<br>
@@ -13,8 +24,8 @@ echo '<form action="#" method="post">
         New Value: <input type="text" name="newvalue"><br>
         Where: <br>
                 <input type="radio" name="where" value="Name"> Name<br>
-                <input type="radio" name="wherewhere" value="Age"> Age<br>
-                <input type="radio" name="group1" value="Course"> Course<br>
+                <input type="radio" name="where" value="Age"> Age<br>
+                <input type="radio" name="where" value="Course"> Course<br>
         Old Value: <input type="text" name="oldvalue"><br>
         <input type="submit">
       </form>';

@@ -2,11 +2,15 @@
 /**
  * TeacherController gets model accordingly and perform different functions.
  */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * Including modelFactory to create model according to teacher.
  */
-include_once '../../core/models/modelFactory.php';
+include_once $_SESSION['Root'].'\core\models\modelFactory.php';
 
 /**
  * TeacherController class has CRUD functionality.
@@ -19,10 +23,10 @@ class TeacherController
      */
     private $model;
     /**
-     * Value of model is set in constructor
+     * Set value of model
      * @param string $typeofModel
      */
-    public function __construct($typeofModel)
+    public function setModel($typeofModel)
     {
         $this->model=ModelFactory::createModel($typeofModel);
     }
@@ -44,10 +48,18 @@ class TeacherController
      */
     public function readTeacher()
     {
-        $this->model->readTeacherRow();
+        $count=$this->model->readTeacherRow();
+        echo "<table><tr><th>Name</th><th>Age</th><th>Course</th></tr>";
+        $size=sizeof($count);
+        for($i=0;$i<$size;$i++)
+        {
+            echo "<tr><td style='text-align:left'>".$count[$i][0]."</td><td style='text-align:center'>".$count[$i][1]."</td><td style='text-align:center'>".$count[$i][2]."</td></tr>";
+        
+        }
+        echo "</table>";
     }
     /**
-     * 
+     * Updates Table
      * @param string $column1 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
      * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
      * @param mixed $newvalue Value which is going to be set in place of old value

@@ -2,6 +2,10 @@
 /**
  * Database connection formed with insert,update,delete and select queries
  */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
 /**
  * DBAL singleton class connects with PDO database
@@ -59,12 +63,12 @@ class DBAL
     {
         DBAL::connect();
         $insertquery=NULL;
-        if($modelname=="course")
+        if($modelname=="course")//if model is course table(as it has only 2 columns)
         {
             $insertquery="INSERT INTO $modelname VALUES(?,?)";
             DBAL::connect()->prepare($insertquery)->execute([$value1,$value2]);
         }
-        else
+        else//if model is teacher or student(as they have 3 columns)
         {
             $insertquery="INSERT INTO $modelname VALUES(?,?,?)";
             DBAL::connect()->prepare($insertquery)->execute([$value1,$value2,$value3]);
@@ -74,6 +78,7 @@ class DBAL
     /**
      * Select all the table
      * @param string $modelname Table name
+     * @return array Array of table values
      */
     public function selecttable($modelname)
     {   
@@ -81,11 +86,25 @@ class DBAL
         $selectquery="SELECT * FROM $modelname";
         $result=DBAL::connect()->prepare($selectquery);
         $result->execute();
+        $arr=array();//$arr is 2D array and it will store the values of table
         foreach($result->fetchAll(PDO::FETCH_ASSOC) as $row)
         {
-            print_r($row);
-            echo "<br>";
+            if($modelname=="course")//course table has CourseName and CourseCode
+            {
+                $arr1=array($row['CourseName'],$row['CourseCode']);
+                          
+            }
+            else if($modelname=="student")//student table has Name,Age and Degree
+            {
+                $arr1=array($row['Name'],$row['Age'],$row['Degree']);       
+            }
+            else//teacher table has Name,Age and Course
+            {
+                $arr1=array($row['Name'],$row['Age'],$row['Course']);
+            }
+            array_push($arr,$arr1);
         }
+        return $arr;//retruning the values of table.
     }
     /**
      * Update Table

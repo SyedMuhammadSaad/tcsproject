@@ -1,15 +1,24 @@
 <?php
+/**
+ * Adding or Creating new values in teacher,course and student table
+ */
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\teacherController.php';
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\studentController.php';
-include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\courseController.php';
-include_once 'C:\xampp\htdocs\TCS_Project\core\models\modelFactory.php';
+/**
+ * Including the files requiered
+ */
+include_once $_SESSION['Root'].'\app\controllers\teacherController.php';
+include_once $_SESSION['Root'].'\app\controllers\studentController.php';
+include_once $_SESSION['Root'].'\app\controllers\courseController.php';
+include_once $_SESSION['Root'].'\core\models\modelFactory.php';
 
-
-session_start();
-echo $_SESSION["buttonvalue"];
+//making form and taking inputs
 echo '<form action="#" method="post">';
-if($_SESSION["buttonvalue"]=="course")
+if($_SESSION["buttonvalue"]=="course")//if input is course
 {
     echo '
             CourseName: <input type="text" name="coursename" placeholder="Course Name"><br>
@@ -18,7 +27,7 @@ if($_SESSION["buttonvalue"]=="course")
     
     $courseName = filter_input(INPUT_POST, "coursename");
     $courseCode = filter_input(INPUT_POST, "coursecode");
-    $contrlrfctry=new CourseController;
+    $contrlrfctry=new CourseController;//making object accordingly
     $contrlrfctry->setModel("course");
     if($courseName!=NULL && $courseCode!=NULL)
     {
@@ -29,7 +38,7 @@ if($_SESSION["buttonvalue"]=="course")
         <input type="submit">
     </form>';
 }
-else
+else//if input is teacher or student
 {
     echo '
             Name: <input type="text" name="name" placeholder="Name"><br>
@@ -49,6 +58,7 @@ else
     
     $name = filter_input(INPUT_POST, "name");
     $age = filter_input(INPUT_POST, "age");
+    //making object accordingly
     if($_SESSION["buttonvalue"]=="teacher")
     {
         $course = filter_input(INPUT_POST, "course");
@@ -60,7 +70,7 @@ else
             $contrlrfctry->readTeacher();
         }
     }
-    else
+    else//making object accordingly
     {
         $degree = filter_input(INPUT_POST, "degree");
         $contrlrfctry=new StudentController;

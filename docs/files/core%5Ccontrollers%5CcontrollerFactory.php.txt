@@ -1,0 +1,49 @@
+<?php
+/**
+ * Controller Factory implemented here. Making objects according to input.
+ */
+
+
+/**
+ * Including files so controller can select which class to return
+ */
+require_once  'C:\xampp\htdocs\TCS_Project\app\controllers\teacherController.php';
+require_once 'C:\xampp\htdocs\TCS_Project\app\controllers\studentController.php';
+require_once 'C:\xampp\htdocs\TCS_Project\app\controllers\courseController.php';
+
+/**
+ * ControllerFactory make the controller according to the parameter passed
+ */
+class ControllerFactory
+{
+    /**
+     * Factory Method implemented
+     * @param string $type Type of button pressed is passed here to select controller
+     * @return string|\StudentController|\TeacherController|\CourseController
+     */
+    public static function createController($type) 
+    {
+        if($type==="teacher")
+        {
+            return new TeacherController;//returning control to TeacherController
+        }
+        else if($type==="student")
+        {
+            return new StudentController;//returning control to StudentController
+        }
+        else if($type==="course")
+        {
+            return new CourseController;//returning control to CourseController
+        }
+        else
+        {
+            return "Wrong Type Selected";//if wrong type is seleceted echo the wrong selection
+        }
+    }
+    
+}
+
+
+?>
+
+

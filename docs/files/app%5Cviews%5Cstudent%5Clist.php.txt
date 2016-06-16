@@ -1,0 +1,21 @@
+<?php
+/**
+ * Student list.php file
+ */
+
+/**
+ * Including files
+ */
+include_once 'C:\xampp\htdocs\TCS_Project\app\controllers\studentController.php';
+/**
+ * listing the elements in student table.
+ * @param studentController $obj Object made so function can be used
+ */
+function listStudent($obj)
+{
+    $obj->readStudent();
+}
+
+?>
+
+

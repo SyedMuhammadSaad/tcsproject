@@ -1,9 +1,22 @@
 <?php
+/**
+ * modelFactory makes the model from course,student or teacher
+ */
+if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
 
-include_once '../../app/models/course.php';
-include_once '../../app/models/student.php';
-include_once '../../app/models/teacher.php';
+/**
+ * Including the models
+ */
+include_once $_SESSION['Root'].'\app\models\course.php';
+include_once $_SESSION['Root'].'\app\models\student.php';
+include_once $_SESSION['Root'].'\app\models\teacher.php';
 
+/**
+ * ModelFactory making the model according to they typeofModel passed.
+ */
 class ModelFactory
 {
     /**
