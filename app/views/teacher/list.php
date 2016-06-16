@@ -2,7 +2,7 @@
 /**
  * Teacher list.php file
  */
-echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+
 if(session_status()!=PHP_SESSION_ACTIVE)
         {
             session_start();
@@ -18,6 +18,7 @@ include_once $_SESSION['Root'].'\app\controllers\teacherController.php';
  */
 function listTeacher($obj)
 {
+    echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
     $obj->readTeacher();
 }
 

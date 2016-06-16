@@ -2,7 +2,7 @@
 /**
  * Adding or Creating new values in teacher,course and student table
  */
-echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Index Page</a></h4>';
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
 if(session_status()!=PHP_SESSION_ACTIVE)
         {
             session_start();
