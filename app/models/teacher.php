@@ -11,27 +11,13 @@ if(session_status()!=PHP_SESSION_ACTIVE)
  * Include Database.php
  */
 require_once $_SESSION['Root'].'\core\models\database\database.php';
+require_once $_SESSION['Root'].'\core\models\baseModel.php';
 
 /**
  * TeacherModel class connects with database and executes commands from functions
  */
-class TeacherModel
+class TeacherModel extends BaseModel
 {
-    /**
-     * Name of teacher
-     * @var string Name is the first column
-     */
-    private $name;
-    /**
-     * Age of teacher
-     * @var int Age is the second column
-     */
-    private $age;
-    /**
-     * Course taught by teacher
-     * @var string Course is the third column
-     */
-    private $course;
     /**
      * Empty Constructor
      */
@@ -43,42 +29,42 @@ class TeacherModel
      * @return string
      */
     public function getName() {
-        return $this->name;
+        return parent::getName();
     }
     /**
      * Gets Age of teacher
      * @return int
      */
     public function getAge() {
-        return $this->age;
+        return parent::getAge();
     }
     /**
      * Gets Course of teacher
      * @return string
      */
     public function getCourse() {
-        return $this->course;
+        return parent::getCourse();
     }
     /**
      * Set Name of teacher
      * @param string $name Name
      */
     public function setName($name) {
-        $this->name = $name;
+        parent::setName($name);
     }
     /**
      * Sets Age of teacher
      * @param int $age Age
      */
     public function setAge($age) {
-        $this->age = $age;
+        parent::setAge($age);
     }
     /**
      * Sets Course of teacher
      * @param string $course Course
      */
     public function setCourse($course) {
-        $this->course = $course;
+        parent::setCourse($course);
     }
     /**
      * Calls function of inserttable from database to create new teacher

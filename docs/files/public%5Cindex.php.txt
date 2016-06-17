@@ -14,11 +14,20 @@ and open the template in the editor.
         /**
          * index file calling default.php
          */
+        define('Root_dir',__DIR__);
         
         /**
          * Including files
          */
-        include_once '../app/views/layouts/default.php';
+        if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
+        $str=Root_dir;
+        $str=  rtrim($str,'\public');
+        $_SESSION['Root']=$str;
+        
+        include_once $_SESSION['Root'].'/app/views/layouts/default.php';
         ?>
     </body>
 </html>

@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <p>Which Field you want to get access to:</p>
+        <p><b>Select the Table name and operation you want to perform.</b></p>
         <br>
         <form action="#" method="post" enctype="multipart/form-data">
             
@@ -29,13 +29,19 @@ and open the template in the editor.
         /**
          * Including files
          */
-        include_once 'C:\xampp\htdocs\TCS_Project\core\controllers\controllerFactory.php';
-        include_once 'C:\xampp\htdocs\TCS_Project\app\views\teacher\list.php';
-        include_once 'C:\xampp\htdocs\TCS_Project\app\views\student\list.php';
-        include_once 'C:\xampp\htdocs\TCS_Project\app\views\course\list.php';
+        
+        if(session_status()!=PHP_SESSION_ACTIVE)
+        {
+            session_start();
+        }
+        
+        include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
+        include_once $_SESSION['Root'].'\app\views\teacher\list.php';
+        include_once $_SESSION['Root'].'\app\views\student\list.php';
+        include_once $_SESSION['Root'].'\app\views\course\list.php';
         
         
-        session_start();
+        
         $crudvalue = filter_input(INPUT_POST, "crud");//input for crud is saved here
         $buttonvalue = filter_input(INPUT_POST, "buttonchoice");//input for table formed is saved here
         $addpagebutton=$buttonvalue;

@@ -1,7 +1,16 @@
 <?php
+/**
+ * Testing Database
+ */
 
+/**
+ * Including files
+ */
 include_once 'C:\xampp\htdocs\TCS_Project\core\models\database\database.php';
 
+/**
+ * databaseTest class tests the database connection
+ */
 class databaseTest extends PHPUnit_Framework_TestCase
 {
     /**

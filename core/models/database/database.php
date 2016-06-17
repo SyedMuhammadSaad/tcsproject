@@ -2,10 +2,6 @@
 /**
  * Database connection formed with insert,update,delete and select queries
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
 
 /**
  * DBAL singleton class connects with PDO database

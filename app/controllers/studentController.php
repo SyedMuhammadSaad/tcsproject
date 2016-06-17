@@ -35,13 +35,22 @@ class StudentController
      * @param string $name Name
      * @param int $age Age
      * @param string $degree Degree Name
+     * @return boolean
      */
     public function createstudent($name,$age,$degree)
     {
-        $this->model->setName("$name");
-        $this->model->setAge($age);
-        $this->model->setDegree("$degree");
-        $this->model->createStudentRow();
+        if($name==NULL || $age==NULL || $degree==NULL)
+        {
+            return false;
+        }
+        else
+        {
+            $this->model->setName("$name");
+            $this->model->setAge($age);
+            $this->model->setDegree("$degree");
+            $this->model->createStudentRow();
+            return true;
+        }
     }
     /**
      * All of the student are shown or read from table.
@@ -51,12 +60,19 @@ class StudentController
         $count=$this->model->readStudentRow();
         echo "<table><tr><th>Name</th><th>Age</th><th>Degree</th></tr>";
         $size=sizeof($count);
-        for($i=0;$i<$size;$i++)
+        if($size>0)
         {
-            echo "<tr><td style='text-align:left'>".$count[$i][0]."</td><td style='text-align:center'>".$count[$i][1]."</td><td style='text-align:left'>".$count[$i][2]."</td></tr>";
-        
+            for($i=0;$i<$size;$i++)
+            {
+                echo "<tr><td style='text-align:left'>".$count[$i][0]."</td><td style='text-align:center'>".$count[$i][1]."</td><td style='text-align:left'>".$count[$i][2]."</td></tr>";
+
+            }
         }
         echo "</table>";
+        if($size==0)
+        {
+            echo "<b>No Table to be Displayed</b>";
+        }
     }
     /**
      * Updates Table
@@ -64,19 +80,39 @@ class StudentController
      * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
      * @param mixed $newvalue Value which is going to be set in place of old value
      * @param mixed $oldvalue Value to be replaced
+     * @return boolean
      */
     public function updatestudent($column1,$column2,$newvalue,$oldvalue)//Update table set column1 = newvalue where column2 = oldvalue
     {
-        $this->model->updateStudentRow($column1,$column2, $newvalue, $oldvalue);
+        if($column1==NULL || $column2==NULL || $newvalue==NULL || $oldvalue==NULL)
+        {
+            return false;
+        }
+        else
+        {
+            $this->model->updateStudentRow($column1,$column2, $newvalue, $oldvalue);
+            return true;
+        }
+        
     }
     /**
      * Deleted the row from table.
      * @param string $column Column Name
      * @param mixed $value Value with which row to be deleted
+     * @return boolean
      */
     public function deletestudent($column, $value)
     {
-        $this->model->deleteStudentRow($column, $value);
+        if($column==NULL || $value==NULL)
+        {
+            return false;
+        }
+        else
+        {
+            $this->model->deleteStudentRow($column, $value);
+            return true;
+        }
+        
     }
 }
 

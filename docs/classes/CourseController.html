@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">35</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">60</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,22 +136,30 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-875386610"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2124282871"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-875386610" class="accordion-body collapse in">
+            <div id="namespace-2124282871" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/ControllerFactory.html">ControllerFactory</a></li>
+                                                    <li class="interface"><a href="../classes/ModelInterface.html">ModelInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/BaseModel.html">BaseModel</a></li>
+                                                    <li class="class"><a href="../classes/ControllerFactory.html">ControllerFactory</a></li>
+                                                    <li class="class"><a href="../classes/ControllerFactoryTest.html">ControllerFactoryTest</a></li>
                                                     <li class="class"><a href="../classes/CourseController.html">CourseController</a></li>
                                                     <li class="class"><a href="../classes/CourseModel.html">CourseModel</a></li>
+                                                    <li class="class"><a href="../classes/databaseTest.html">databaseTest</a></li>
                                                     <li class="class"><a href="../classes/DBAL.html">DBAL</a></li>
                                                     <li class="class"><a href="../classes/ModelFactory.html">ModelFactory</a></li>
+                                                    <li class="class"><a href="../classes/ModelFactoryTest.html">ModelFactoryTest</a></li>
                                                     <li class="class"><a href="../classes/StudentController.html">StudentController</a></li>
+                                                    <li class="class"><a href="../classes/StudentControllerTest.html">StudentControllerTest</a></li>
+                                                    <li class="class"><a href="../classes/StudentControllerTest.html">StudentControllerTest</a></li>
                                                     <li class="class"><a href="../classes/StudentModel.html">StudentModel</a></li>
                                                     <li class="class"><a href="../classes/TeacherController.html">TeacherController</a></li>
+                                                    <li class="class"><a href="../classes/TeacherControllerTest.html">TeacherControllerTest</a></li>
                                                     <li class="class"><a href="../classes/TeacherModel.html">TeacherModel</a></li>
                                             </ul>
                 </div>
@@ -332,7 +340,7 @@
             <article class="method">
                 <h3 class="public ">createCourse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">createCourse(string  <span class="argument">$courseName</span>, string  <span class="argument">$courseCode</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">createCourse(string  <span class="argument">$courseName</span>, string  <span class="argument">$courseCode</span>) : boolean</pre>
                 <p><em>Course is created by putting in the information.</em></p>
                 
 
@@ -351,7 +359,9 @@
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -397,7 +407,7 @@
             <article class="method">
                 <h3 class="public ">updateCourse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">updateCourse(string  <span class="argument">$column1</span>, string  <span class="argument">$column2</span>, mixed  <span class="argument">$newvalue</span>, mixed  <span class="argument">$oldvalue</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">updateCourse(string  <span class="argument">$column1</span>, string  <span class="argument">$column2</span>, mixed  <span class="argument">$newvalue</span>, mixed  <span class="argument">$oldvalue</span>) : boolean</pre>
                 <p><em>Updates Table</em></p>
                 
 
@@ -426,7 +436,9 @@
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -446,7 +458,7 @@
             <article class="method">
                 <h3 class="public ">deleteCourse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteCourse(string  <span class="argument">$column</span>, mixed  <span class="argument">$value</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">deleteCourse(string  <span class="argument">$column</span>, mixed  <span class="argument">$value</span>) : boolean</pre>
                 <p><em>Deleted the row from table.</em></p>
                 
 
@@ -465,7 +477,9 @@
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -528,7 +542,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 16th, 2016 at 11:16.
+                    on June 17th, 2016 at 12:35.
                 </section>
             </section>
         </section>

@@ -11,22 +11,13 @@ if(session_status()!=PHP_SESSION_ACTIVE)
  * Include Database.php
  */
 require_once $_SESSION['Root'].'\core\models\database\database.php';
+require_once $_SESSION['Root'].'\core\models\baseModel.php';
 
 /**
  * CourseModel class connects with database and executes commands from functions
  */
-class CourseModel
+class CourseModel extends BaseModel
 {
-    /**
-     * Name of the course
-     * @var string Course Name
-     */
-    private $courseName;
-    /**
-     * Code of the course
-     * @var string Course Code
-     */
-    private $courseCode;
     /**
      * Empty constructor
      */
@@ -38,28 +29,28 @@ class CourseModel
      * @return string
      */
     public function getCourseName() {
-        return $this->courseName;
+        return parent::getCourseName();
     }
     /**
      * Gets the course code
      * @return string
      */
     public function getCourseCode() {
-        return $this->courseCode;
+        return parent::getCourseCode();
     }
     /**
      * Sets the course name
      * @param string $courseName Course Name
      */
     public function setCourseName($courseName) {
-        $this->courseName = $courseName;
+        parent::setCourseName($courseName);
     }
     /**
      * Sets the course code
      * @param string $courseCode Course code
      */
     public function setCourseCode($courseCode) {
-        $this->courseCode = $courseCode;
+        parent::setcourseCode($courseCode);
     }
     /**
      * Calls function of inserttable from database to create new Course

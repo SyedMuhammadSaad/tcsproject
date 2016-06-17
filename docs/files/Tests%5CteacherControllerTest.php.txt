@@ -1,0 +1,80 @@
+<?php
+/**
+ * Testing teacherController
+ */
+
+/**
+ * Including files
+ */
+include_once '../public/index.php';
+require_once $_SESSION['Root'].'\app\controllers\teacherController.php';
+
+/**
+ * Testing teacherController and crud functionalities
+ */
+class TeacherControllerTest extends PHPUnit_Framework_TestCase
+{
+    /**
+     * Returning array of array to test testCreateTeacher
+     * @return array
+     */
+    public function providertestCreateTeacher()
+    {
+        return array(array("Aadil",50,"Marketing"),array("",45,"Advance Mathematics"));
+    }
+    /**
+     * Testing createTeacher
+     * @param string $name
+     * @param int $age
+     * @param string $course
+     * @dataProvider providertestCreateTeacher
+     */
+    public function testCreateTeacher($name, $age, $course)
+    {
+        $obj=new TeacherController;
+        $obj->setModel("teacher");
+        $this->assertEquals(true,$obj->createTeacher($name, $age, $course));
+    }
+    /**
+     * Returning array of array to test testUpdateTeacher
+     * @return array
+     */
+    public function providertestUpdateTeacher()
+    {
+        return array(array("Age","Name",40,"Aadil"),array("","Age",40,"Aadil"));
+    }
+    /**
+     * Testing UpdateTeacher
+     * @param string $column1
+     * @param string $column2
+     * @param mixed $newvalue
+     * @param mixed $oldvalue
+     * @dataProvider providertestUpdateTeacher
+     */
+    public function testUpdateTeacher($column1, $column2, $newvalue, $oldvalue)
+    {
+        $obj=new TeacherController;
+        $obj->setModel("teacher");
+        $this->assertEquals(true,$obj->updateTeacher($column1, $column2, $newvalue, $oldvalue));
+    }
+    /**
+     * Returning array of array to test testDeleteTeacher
+     * @return array
+     */
+    public function providertestDeleteTeacher()
+    {
+        return array(array("Name",""),array("Name","Aadil"));
+    }
+    /**
+     * Deleteing Teacher
+     * @param string $column
+     * @param mixed $value
+     * @dataProvider providertestDeleteTeacher
+     */
+    public function testDeleteTeacher($column, $value)
+    {
+        $obj=new TeacherController;
+        $obj->setModel("teacher");
+        $this->assertEquals(true,$obj->deleteTeacher($column, $value));
+    }
+}
