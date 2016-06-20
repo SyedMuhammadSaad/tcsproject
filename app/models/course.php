@@ -74,7 +74,7 @@ class CourseModel extends BaseModel
      * @param mixed $newvalue New value
      * @param mixed $oldvalue Value to be replaced
      */
-    public function updateCourseRow($column1,$column2,$newvalue,$oldvalue)
+    public function update($column1,$column2,$newvalue,$oldvalue)
     {
         DBAL::updatetable("course",$column1,$column2,$newvalue,$oldvalue);
     }
@@ -83,7 +83,7 @@ class CourseModel extends BaseModel
      * @param string $column Column of the table with which value is to be deleted
      * @param mixed $value Value with which to be deleted
      */
-    public function deleteCourseRow($column,$value)
+    public function delete($column,$value)
     {
         DBAL::deletetable("course",$column,$value);
     }

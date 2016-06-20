@@ -12,7 +12,7 @@ and open the template in the editor.
     <body>
         <?php
         /**
-         * index file calling default.php
+         * Index file calling default.php
          */
         define('Root_dir',__DIR__);
         

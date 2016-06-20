@@ -11,11 +11,11 @@ if(session_status()!=PHP_SESSION_ACTIVE)
  * Including modelFactory to create model according to teacher.
  */
 include_once $_SESSION['Root'].'\core\models\modelFactory.php';
-
+include_once $_SESSION['Root'].'\core\controllers\baseController.php';
 /**
  * TeacherController class has CRUD functionality.
  */
-class TeacherController
+class TeacherController extends BaseController
 {
     /**
      * Gets the type of model to use the parameters accordingly.
@@ -28,7 +28,7 @@ class TeacherController
      */
     public function setModel($typeofModel)
     {
-        $this->model=ModelFactory::createModel($typeofModel);
+        $this->model=parent::setModel($typeofModel);
     }
     /**
      * Teacher is created by putting in the information.
@@ -55,7 +55,7 @@ class TeacherController
     /**
      * All of the teachers are shown or read from table.
      */
-    public function readTeacher()
+    public function read()
     {
         $count=$this->model->readTeacherRow();
         echo "<table><tr><th>Name</th><th>Age</th><th>Course</th></tr>";
@@ -84,15 +84,7 @@ class TeacherController
      */
     public function updateTeacher($column1,$column2,$newvalue,$oldvalue)//Update table set column1 = newvalue where column2 = oldvalue
     {
-        if($column1==NULL || $column2==NULL || $newvalue==NULL || $oldvalue==NULL)
-        {
-            return false;
-        }
-        else
-        {
-            $this->model->updateTeacherRow($column1,$column2, $newvalue, $oldvalue);
-            return true;
-        }
+        return parent::update($column1, $column2, $newvalue, $oldvalue);
     }
     /**
      * Deleted the row from table.
@@ -102,15 +94,7 @@ class TeacherController
      */
     public function deleteTeacher($column, $value)
     {
-        if($column==NULL || $value==NULL)
-        {
-            return false;
-        }
-        else
-        {
-            $this->model->deleteTeacherRow($column, $value);
-            return true;
-        }
+        return parent::delete($column, $value);
     }
 }
 ?>

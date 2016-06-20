@@ -88,7 +88,7 @@ class TeacherModel extends BaseModel
      * @param mixed $newvalue New value
      * @param mixed $oldvalue Value to be replaced
      */
-    public function updateTeacherRow($column1,$column2,$newvalue,$oldvalue)
+    public function update($column1,$column2,$newvalue,$oldvalue)
     {
         DBAL::updatetable("teacher",$column1,$column2,$newvalue,$oldvalue);
     }
@@ -97,7 +97,7 @@ class TeacherModel extends BaseModel
      * @param string $column Column of the table with which value is to be deleted
      * @param mixed $value Value with which to be deleted
      */
-    public function deleteTeacherRow($column,$value)
+    public function delete($column,$value)
     {
         DBAL::deletetable("teacher",$column,$value);
     }

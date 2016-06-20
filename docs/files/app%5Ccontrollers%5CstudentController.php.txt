@@ -11,11 +11,11 @@ if(session_status()!=PHP_SESSION_ACTIVE)
  * Including modelFactory to create model according to student.
  */
 include_once $_SESSION['Root'].'\core\models\modelFactory.php';
-
+include_once $_SESSION['Root'].'\core\controllers\baseController.php';
 /**
  * StudentController class has CRUD functionality.
  */
-class StudentController
+class StudentController extends BaseController
 {
     /**
      * Gets the type of model to use the parameters accordingly.
@@ -28,7 +28,7 @@ class StudentController
      */
     public function setModel($typeofModel)
     {
-        $this->model=ModelFactory::createModel($typeofModel);
+        $this->model=parent::setModel($typeofModel);
     }
     /**
      * Student is created by putting in the information.
@@ -55,7 +55,7 @@ class StudentController
     /**
      * All of the student are shown or read from table.
      */
-    public function readstudent()
+    public function read()
     {
         $count=$this->model->readStudentRow();
         echo "<table><tr><th>Name</th><th>Age</th><th>Degree</th></tr>";
@@ -84,16 +84,7 @@ class StudentController
      */
     public function updatestudent($column1,$column2,$newvalue,$oldvalue)//Update table set column1 = newvalue where column2 = oldvalue
     {
-        if($column1==NULL || $column2==NULL || $newvalue==NULL || $oldvalue==NULL)
-        {
-            return false;
-        }
-        else
-        {
-            $this->model->updateStudentRow($column1,$column2, $newvalue, $oldvalue);
-            return true;
-        }
-        
+        return parent::update($column1, $column2, $newvalue, $oldvalue);
     }
     /**
      * Deleted the row from table.
@@ -103,16 +94,7 @@ class StudentController
      */
     public function deletestudent($column, $value)
     {
-        if($column==NULL || $value==NULL)
-        {
-            return false;
-        }
-        else
-        {
-            $this->model->deleteStudentRow($column, $value);
-            return true;
-        }
-        
+        return parent::delete($column, $value);
     }
 }
 

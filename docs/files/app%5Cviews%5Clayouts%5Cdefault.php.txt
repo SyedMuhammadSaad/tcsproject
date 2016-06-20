@@ -64,15 +64,15 @@ and open the template in the editor.
             {
                 if($buttonvalue=="teacher")
                 {
-                    listTeacher($contrlrfctry);
+                    listTeacher();
                 }
                 else if($buttonvalue=="student")
                 {
-                    listStudent($contrlrfctry);
+                    listStudent();
                 }
                 else
                 {
-                    listCourse($contrlrfctry);
+                    listCourse();
                 }
             }
             if($crudvalue==="update")//if option selected if update

@@ -11,13 +11,14 @@ if(session_status()!=PHP_SESSION_ACTIVE)
 /**
  * Including the files requiered
  */
-include_once $_SESSION['Root'].'\app\controllers\teacherController.php';
-include_once $_SESSION['Root'].'\app\controllers\studentController.php';
-include_once $_SESSION['Root'].'\app\controllers\courseController.php';
+include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
 include_once $_SESSION['Root'].'\core\models\modelFactory.php';
 
 //making form and taking inputs
 echo '<form action="#" method="post">';
+$var=$_SESSION["buttonvalue"];
+$contrlrfctry=ControllerFactory::createController("$var");
+$contrlrfctry->setModel("$var");
 if($_SESSION["buttonvalue"]=="course")//if input is course
 {
     echo '
@@ -27,12 +28,10 @@ if($_SESSION["buttonvalue"]=="course")//if input is course
     
     $courseName = filter_input(INPUT_POST, "coursename");
     $courseCode = filter_input(INPUT_POST, "coursecode");
-    $contrlrfctry=new CourseController;//making object accordingly
-    $contrlrfctry->setModel("course");
     if($courseName!=NULL && $courseCode!=NULL)
     {
         $contrlrfctry->createCourse($courseName, $courseCode);
-        $contrlrfctry->readCourse();
+        $contrlrfctry->read();
     }
     echo '
         <input type="submit">
@@ -62,23 +61,19 @@ else//if input is teacher or student
     if($_SESSION["buttonvalue"]=="teacher")
     {
         $course = filter_input(INPUT_POST, "course");
-        $contrlrfctry=new TeacherController;
-        $contrlrfctry->setModel("teacher");
         if($name!=NULL && $age!=NULL && $course!=NULL)
         {
             $contrlrfctry->createTeacher($name, $age, $course);
-            $contrlrfctry->readTeacher();
+            $contrlrfctry->read();
         }
     }
     else//making object accordingly
     {
         $degree = filter_input(INPUT_POST, "degree");
-        $contrlrfctry=new StudentController;
-        $contrlrfctry->setModel("student");
         if($name!=NULL && $age!=NULL && $degree!=NULL)
         {
             $contrlrfctry->createstudent($name, $age, $degree);
-            $contrlrfctry->readstudent();
+            $contrlrfctry->read();
         }
     }
 }

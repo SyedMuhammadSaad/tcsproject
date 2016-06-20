@@ -11,15 +11,17 @@ if(session_status()!=PHP_SESSION_ACTIVE)
 /**
  * Including files
  */
-include_once $_SESSION['Root'].'\app\controllers\courseController.php';
+include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
 /**
  * listing the elements in course table.
  * @param courseController $obj Object made so function can be used
  */
-function listCourse($obj)
+function listCourse()
 {
     echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
-    $obj->readCourse();
+    $contrlrfctry=ControllerFactory::createController("course");
+    $contrlrfctry->setModel("course");
+    $contrlrfctry->read();
 }
 
 ?>

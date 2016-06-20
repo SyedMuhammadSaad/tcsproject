@@ -11,7 +11,7 @@ if(session_status()!=PHP_SESSION_ACTIVE)
 /**
  * Including files
  */
-include_once $_SESSION['Root'].'\app\controllers\studentController.php';
+include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
 include_once $_SESSION['Root'].'\core\models\modelFactory.php';
 include_once $_SESSION['Root'].'\app\views\layouts\default.php';
 //making form and taking values
@@ -26,11 +26,11 @@ echo '<form action="#" method="post">
        </form>';
 $set = filter_input(INPUT_POST, "set");
 $value = filter_input(INPUT_POST, "value");
-$contrlrfctry=new StudentController;
+$contrlrfctry=ControllerFactory::createController("student");
 $contrlrfctry->setModel("student");
 if($set!=NULL && $value!=NULL)
 {
     $contrlrfctry->deletestudent($set, $value);
-    $contrlrfctry->readstudent();
+    $contrlrfctry->read();
 }
 ?>
