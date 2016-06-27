@@ -59,7 +59,14 @@ class DBAL
     {
         DBAL::connect();
         $insertquery="INSERT INTO {$modelname} ({$column}) VALUES (?);";
-        DBAL::connect()->prepare($insertquery)->execute([$value1]);
+        try
+        {
+            DBAL::connect()->prepare($insertquery)->execute([$value1]);
+        }
+        catch(PDOException $e)
+        {
+            echo "An error occurred!".$e->getMessage();
+        }
         
     }
     
@@ -101,7 +108,14 @@ class DBAL
     {
         DBAL::connect();
         $update_query="UPDATE $modelname SET $value1 = ? WHERE $value2 = ?";
-        DBAL::connect()->prepare($update_query)->execute([$newvalue,$oldvalue]);
+        try
+        {
+            DBAL::connect()->prepare($update_query)->execute([$newvalue,$oldvalue]);
+        }
+        catch(PDOException $e)
+        {
+            echo "An error occurred!".$e->getMessage();
+        }
     }
     /**
      * Delete table
@@ -113,7 +127,14 @@ class DBAL
     {
         DBAL::connect();
         $delete_query="DELETE FROM $modelname WHERE $col = ?";
-        DBAL::connect()->prepare($delete_query)->execute([$value]);
+        try
+        {
+            DBAL::connect()->prepare($delete_query)->execute([$value]);
+        }
+        catch(PDOException $e)
+        {
+            echo "An error occurred!".$e->getMessage();
+        }
     }
 }
 //DBAL::update("teacher","Age","Name",28,"Ali Afzal");
