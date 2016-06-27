@@ -2,66 +2,36 @@
 /**
  * ModelInterface has functions with all setter and getter
  */
-
+namespace core\models;
 /**
  * ModelInterface has pure virtual functions.
  */
 interface ModelInterface
 {
     /**
-     * Name Setter
-     * @param string $name
+     * Create model
+     * @param type $column1
+     * @param type $value1
      */
-    function setName($name);
+    function create($tablename,$column1,$value1);
     /**
-     * Name Getter
+     * Read model
      */
-    function getName();
+    function read($tablename);
     /**
-     * Age Setter
-     * @param int $age
+     * Update model
+     * @param type $column1
+     * @param type $column2
+     * @param type $newvalue
+     * @param type $oldvalue
      */
-    function setAge($age);
+    function update($tablename,$column1,$column2,$newvalue,$oldvalue);
     /**
-     * Age Getter
+     * Delete model
+     * @param type $column
+     * @param type $value
      */
-    function getAge();
-    /**
-     * Course Setter
-     * @param string $course
-     */
-    function setCourse($course);
-    /**
-     * Course Getter
-     */
-    function getCourse();
-    /**
-     * Degree Setter
-     * @param string $degree
-     */
-    function setDegree($degree);
-    /**
-     * Degree Getter
-     */
-    function getDegree();
-    /**
-     * CourseName Setter
-     * @param string $courseName
-     */
-    function setCourseName($courseName);
-    /**
-     * CourseName Getter
-     */
-    function getCourseName();
-    /**
-     * CourseCode Setter
-     * @param string $courseCode
-     */
-    function setcourseCode($courseCode);
-    /**
-     * CourseCode Getter
-     */
-    function getCourseCode();
+    function delete($tablename,$column,$value);
 }
 
 ?>

@@ -2,25 +2,9 @@
 /**
  * BaseController impements from ControllerInterface
  */
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'teacher'.d_S.'list.php';
-//
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'teacher'.d_S.'delete.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'student'.d_S.'list.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'student'.d_S.'edit.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'student'.d_S.'delete.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'course'.d_S.'list.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'course'.d_S.'edit.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'course'.d_S.'delete.php';
-//require_once Root.d_S.'app'.d_S.'views'.d_S.'generic'.d_S.'add.php';
-//define("Root",dirname(dirname(dirname(__FILE__))));
-//define("d_S",DIRECTORY_SEPARATOR);
-//require_once Root.d_S.'core'.d_S.'controllers'.d_S.'controllerInterface.php';
-//require_once Root.d_S.'core'.d_S.'models'.d_S.'modelFactory.php';
-//require_once Root.d_S.'core'.d_S.'models'.d_S.'modelInterface.php';
-//require_once Root.d_S.'core'.d_S.'models'.d_S.'baseModel.php';
-//require_once Root.d_S.'app'.d_S.'models'.d_S.'teacher.php';
-//require_once 'C:\xampp\htdocs\TCS_Project\core\controllers\controllerInterface.php';
-//require_once 'C:\xampp\htdocs\TCS_Project\core\models\modelFactory.php';
+namespace core\controllers;
+use core\controllers\ControllerInterface;
+use core\models\ModelFactory;
 /**
  * BaseController implements from ControllerInterface and defines all the functions
  */
@@ -37,9 +21,10 @@ class BaseController implements ControllerInterface
      */
     function __construct($typeofModel) 
     {
-        return $this->model=ModelFactory::createModel($typeofModel);
+        $obj=new ModelFactory;
+        return $this->model=$obj->createModel($typeofModel);
     }
-    function operation($opr)
+    function operation($opr,$func)
     {
         if($opr=="create")
         {
@@ -47,7 +32,7 @@ class BaseController implements ControllerInterface
         }
         else if($opr=="read")
         {
-            $this->read(NULL);
+            $this->read($func,NULL);
         }
         else if($opr=="update")
         {
@@ -58,7 +43,7 @@ class BaseController implements ControllerInterface
             require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.'delete.php';
         }
     }
-    function create($param)
+    function create($tablename,$param)
     {
         if($param==NULL)
         {
@@ -66,7 +51,7 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->create($param[1],$param[0]);
+            $this->model->create("$tablename",$param[1],$param[0]);
             return true;
         }
         
@@ -74,9 +59,9 @@ class BaseController implements ControllerInterface
     /**
      * Read of Controller is called.
      */
-    function read($param)
+    function read($tablename,$param)
     {
-        $this->model->read($param);
+        $this->model->read("$tablename",$param);
     }
     /**
      * Updates Table
@@ -86,7 +71,7 @@ class BaseController implements ControllerInterface
      * @param mixed $oldvalue Value to be replaced
      * @return boolean
      */
-    function update($param) 
+    function update($tablename,$param) 
     {
         if($param==NULL)
         {
@@ -94,7 +79,7 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->update($param[0],$param[1], $param[2], $param[3]);
+            $this->model->update("$tablename",$param[0],$param[1], $param[2], $param[3]);
             return true;
         }
     }
@@ -104,7 +89,7 @@ class BaseController implements ControllerInterface
      * @param mixed $value Value with which row to be deleted
      * @return boolean
      */
-    function delete($param) 
+    function delete($tablename,$param) 
     {
         if($param==NULL)
         {
@@ -112,7 +97,7 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->delete($param[0], $param[2]);
+            $this->model->delete("$tablename",$param[0], $param[2]);
             return true;
         }
     }

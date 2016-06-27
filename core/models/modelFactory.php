@@ -2,6 +2,7 @@
 /**
  * modelFactory makes the model from course,student or teacher
  */
+namespace core\models;
 //require_once Root.d_S.'app'.d_S.'models'.d_S.'teacher.php';
 //require_once 'C:\xampp\htdocs\TCS_Project\app\models\teacher.php';
 /**
@@ -16,14 +17,14 @@ class ModelFactory
      */
     public static function createModel($type)
     {
-        $className = ucfirst($type)."Model";
+        $className = 'app'.d_S.'models'.d_S.ucfirst($type)."Model";
         if($className!=NULL)
         {
             return new $className;
         }
         else
         {
-            throw new Exception("$className Not Found!");
+            echo "$className Not Found!";
         }
     }
 }

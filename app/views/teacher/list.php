@@ -27,7 +27,7 @@ if($size>0)
 echo "</table>";
 if($size==0)
 {
-    echo "<b>No Table to be Displayed</b>";
+    echo "<h5><i>*No Table to be Displayed</i></h5>";
 }
 
 ?>

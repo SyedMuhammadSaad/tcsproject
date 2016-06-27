@@ -4,7 +4,7 @@
  */
 namespace app\models;
 use core\models\BaseModel;
-use core\models\database\DBAL;
+
 /**
  * StudentModel class connects with database and executes commands from functions
  */
@@ -81,17 +81,17 @@ class StudentModel extends BaseModel
     /**
      * Calls function of inserttable from database to create new Student
      */
-    public function create($column1,$value1)
+    public function create($tablename,$column1,$value1)
     {
-        DBAL::insert("student",$column1,$value1);
+        parent::create($tablename,$column1, $value1);
     }
     /**
      * Calls function of selecttable from database to read all students
      * @return array Returning array of table values
      */
-    public function read()
+    public function read($tablename)
     {
-        return DBAL::select("student");
+        return parent::read($tablename);
     }
     /**
      * Updates the student information
@@ -100,18 +100,18 @@ class StudentModel extends BaseModel
      * @param mixed $newvalue New value
      * @param mixed $oldvalue Value to be replaced
      */
-    public function update($column1,$column2,$newvalue,$oldvalue)
+    public function update($tablename,$column1,$column2,$newvalue,$oldvalue)
     {
-        DBAL::update("student",$column1,$column2,$newvalue,$oldvalue);
+        parent::update($tablename,$column1, $column2, $newvalue, $oldvalue);
     }
     /**
      * Delete the row from student table
      * @param string $column Column of the table with which value is to be deleted
      * @param mixed $value Value with which to be deleted
      */
-    public function delete($column,$value)
+    public function delete($tablename,$column,$value)
     {
-        DBAL::delete("student",$column,$value);
+        parent::delete($tablename,$column, $value);
     }
 
 }

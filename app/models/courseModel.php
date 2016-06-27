@@ -4,7 +4,6 @@
  */
 namespace app\models;
 use core\models\BaseModel;
-use core\models\database\DBAL;
 /**
  * CourseModel class connects with database and executes commands from functions
  */
@@ -61,17 +60,17 @@ class CourseModel extends BaseModel
     /**
      * Calls function of inserttable from database to create new Course
      */
-    public function create($column1,$value1)
+    public function create($tablename,$column1,$value1)
     {
-        DBAL::insert("course",$column1,$value1);
+        parent::create($tablename,$column1, $value1);
     }
     /**
      * Calls function of selecttable from database to read all courses
      * @return array Returning array of table values
      */
-    public function read()
+    public function read($tablename)
     {
-        return DBAL::select("course");
+        return parent::read($tablename);
     }
     /**
      * Updates the course information
@@ -80,18 +79,18 @@ class CourseModel extends BaseModel
      * @param mixed $newvalue New value
      * @param mixed $oldvalue Value to be replaced
      */
-    public function update($column1,$column2,$newvalue,$oldvalue)
+    public function update($tablename,$column1,$column2,$newvalue,$oldvalue)
     {
-        DBAL::update("course",$column1,$column2,$newvalue,$oldvalue);
+        parent::update($tablename,$column1, $column2, $newvalue, $oldvalue);
     }
     /**
      * Delete the row from course table
      * @param string $column Column of the table with which value is to be deleted
      * @param mixed $value Value with which to be deleted
      */
-    public function delete($column,$value)
+    public function delete($tablename,$column,$value)
     {
-        DBAL::delete("course",$column,$value);
+        parent::delete($tablename,$column, $value);
     }
 
 }

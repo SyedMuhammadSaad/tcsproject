@@ -2,7 +2,7 @@
 /**
  * Database connection formed with insert,update,delete and select queries
  */
-
+namespace core\models\database;
 /**
  * DBAL singleton class connects with PDO database
  */
@@ -40,10 +40,10 @@ class DBAL
         if (self::$connection==null) 
         {
             $opt = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES   => false
+                \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_EMULATE_PREPARES   => false
             ];
-            self::$connection=new PDO('mysql:host=localhost;dbname=tcsproject','root','',$opt);
+            self::$connection=new \PDO('mysql:host=localhost;dbname=tcsproject','root','',$opt);
         }
         return self::$connection;
     }
@@ -65,7 +65,7 @@ class DBAL
         }
         catch(PDOException $e)
         {
-            echo "An error occurred!".$e->getMessage();
+            echo "An error occurred!<br>".$e->getMessage();
         }
         
     }
@@ -80,13 +80,13 @@ class DBAL
         DBAL::connect();
         $result1 = DBAL::connect()->prepare("select * from $modelname limit 1");
         $result1->execute();
-        $fields = array_keys($result1->fetch(PDO::FETCH_ASSOC));
+        $fields = array_keys($result1->fetch(\PDO::FETCH_ASSOC));
         $selectquery="SELECT * FROM $modelname";
         $result=DBAL::connect()->prepare($selectquery);
         $result->execute();
         $col=0;
         $arr=array();//$arr is 2D array and it will store the values of table
-        foreach($result->fetchAll(PDO::FETCH_ASSOC) as $row)
+        foreach($result->fetchAll(\PDO::FETCH_ASSOC) as $row)
         {
             for($col=0;$col<$result->columnCount();$col++)
             {
@@ -114,7 +114,7 @@ class DBAL
         }
         catch(PDOException $e)
         {
-            echo "An error occurred!".$e->getMessage();
+            echo "An error occurred!<br>".$e->getMessage();
         }
     }
     /**
@@ -133,7 +133,7 @@ class DBAL
         }
         catch(PDOException $e)
         {
-            echo "An error occurred!".$e->getMessage();
+            echo "An error occurred!<br>".$e->getMessage();
         }
     }
 }

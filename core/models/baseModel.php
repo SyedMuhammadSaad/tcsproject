@@ -2,6 +2,9 @@
 /**
  * BaseModel impements from ModelInterface
  */
+namespace core\models;
+use core\models\database\DBAL;
+use core\models\ModelInterface;
 //require_once 'C:\xampp\htdocs\TCS_Project\core\models\modelInterface.php';
 //require_once Root.d_S.'core'.d_S.'models'.d_S.'modelInterface.php';
 /**
@@ -10,129 +13,40 @@
 class BaseModel implements ModelInterface
 {
     /**
-     * @var string Name
+     * Create model
+     * @param type $column1
+     * @param type $value1
      */
-    private $name;
-    /**
-     *
-     * @var int Age
-     */
-    private $age;
-    /**
-     *
-     * @var string Course Name
-     */
-    private $course;
-    /**
-     *
-     * @var string Degree Name
-     */
-    private $degree;
-    /**
-     *
-     * @var string CourseName
-     */
-    private $courseName;
-    /**
-     *
-     * @var string CourseCode
-     */
-    private $courseCode;
-    /**
-     * Name Setter
-     * @param string $name
-     */
-    function setName($name)
+    function create($tablename,$column1,$value1)
     {
-        $this->name=$name;
+        DBAL::insert("$tablename",$column1,$value1);
     }
     /**
-     * Name Getter
-     * @return string
+     * Read model
      */
-    function getName()
+    function read($tablename)
     {
-        return $this->name;
+        return DBAL::select("$tablename");
     }
     /**
-     * Age Setter
-     * @param int $age
+     * Update model
+     * @param type $column1
+     * @param type $column2
+     * @param type $newvalue
+     * @param type $oldvalue
      */
-    function setAge($age)
+    function update($tablename,$column1,$column2,$newvalue,$oldvalue)
     {
-         $this->age=$age;
+        DBAL::update("$tablename",$column1,$column2,$newvalue,$oldvalue);
     }
     /**
-     * Age Getter
-     * @return int
+     * Delete model
+     * @param type $column
+     * @param type $value
      */
-    function getAge()
+    function delete($tablename,$column,$value)
     {
-        return $this->age;
-    }
-    /**
-     * Course Setter
-     * @param string $course
-     */
-    function setCourse($course)
-    {
-        $this->course=$course;
-    }
-    /**
-     * Course Getter
-     * @return string
-     */
-    function getCourse()
-    {
-        return $this->course;
-    }
-    /**
-     * Degree Setter
-     * @param string $degree
-     */
-    function setDegree($degree)
-    {
-        $this->degree=$degree;
-    }
-    /**
-     * Degree Getter
-     * @return string
-     */
-    function getDegree()
-    {
-        return $this->degree;
-    }
-    /**
-     * CourseName Setter
-     * @param string $courseName
-     */
-    function setCourseName($courseName)
-    {
-        $this->courseName=$courseName;
-    }
-    /**
-     * CourseName Getter
-     * @return string
-     */
-    function getCourseName()
-    {
-        return $this->courseName;
-    }
-    /**
-     * CourseCode Setter
-     * @param string $courseCode
-     */
-    function setcourseCode($courseCode)
-    {
-        $this->courseCode=$courseCode;
-    }
-    /**
-     * CourseCode Getter
-     * @return string
-     */
-    function getCourseCode()
-    {
-        return $this->courseCode;
+        DBAL::delete("$tablename",$column,$value);
     }
 }
 

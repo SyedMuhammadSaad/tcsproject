@@ -2,7 +2,7 @@
 /**
  * Controller Factory implemented here. Making objects according to input.
  */
-
+namespace core\controllers;
 /**
  * ControllerFactory make the controller according to the parameter passed
  */
@@ -15,14 +15,14 @@ class ControllerFactory
      */
     public static function createController($type) 
     {
-        $className = ucfirst($type)."Controller";
+        $className = 'app'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
         if(isset($type))
         {
             return new $className($type);
         }
-        else if($className!="Controller")
+        else if($className=="Controller")
         {
-            throw new Exception("$className Not Found!");
+            echo "$className Not Found!";
         }
     }
 }

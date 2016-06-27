@@ -1,5 +1,8 @@
 <?php
 
+namespace core\util;
+use core\controllers\ControllerFactory;
+use core\controllers\BaseController;
 class request
 {
     private $crud;
@@ -8,10 +11,11 @@ class request
     {
         $this->crud=$crud;
         $this->table=$table;
-        $contrlfactory= ControllerFactory::createController($this->table);
+        $contrlfactoryobj= new ControllerFactory;
+        $contrlfactory=$contrlfactoryobj->createController($this->table);
         if(isset($contrlfactory))
         {
-            $contrlfactory->operation($crud);
+            $contrlfactory->operation($crud,$table);
         }
     }
     public function wrappper()
@@ -20,6 +24,6 @@ class request
         $modname=$_POST['modelname'];
         $crud=$_POST['crudname'];
         $obj= new BaseController("$modname");
-        $obj->$crud($param);
+        $obj->$crud($modname,$param);
     }
 }

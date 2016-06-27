@@ -2,7 +2,8 @@
 /**
  * TeacherController gets model accordingly and perform different functions.
  */
-
+namespace app\controllers;
+use core\controllers\BaseController;
 /**
  * Including modelFactory to create model according to teacher.
  */
@@ -32,7 +33,7 @@ class TeacherController extends BaseController
      * @param string $course Course Name
      * @return boolean
      */
-    public function create($param)
+    public function create($tablename,$param)
     {
         if($param==NULL)
         {
@@ -40,7 +41,7 @@ class TeacherController extends BaseController
         }
         else
         {
-            $this->model->create($param[0],$param[1]);
+            $this->model->create("$tablename",$param[0],$param[1]);
             return true;
         }
         
@@ -48,9 +49,9 @@ class TeacherController extends BaseController
     /**
      * All of the courses are shown or read from table.
      */
-    public function read($param)
+    public function read($tablename,$param)
     {
-        $count=$this->model->read();
+        $count=$this->model->read("$tablename");
         require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.'list.php';
     }
     /**
@@ -61,9 +62,9 @@ class TeacherController extends BaseController
      * @param mixed $oldvalue Value to be replaced
      * @return boolean
      */
-    public function update($param)//Update table set column1 = newvalue where column2 = oldvalue
+    public function update($tablename,$param)//Update table set column1 = newvalue where column2 = oldvalue
     {
-        return parent::update(update($param[0],$param[1], $param[2], $param[3]));
+        return parent::update("$tablename",$param[0],$param[1], $param[2], $param[3]);
     }
     /**
      * Deleted the row from table.
@@ -71,9 +72,9 @@ class TeacherController extends BaseController
      * @param mixed $value Value with which row to be deleted
      * @return boolean
      */
-    public function delete($param)
+    public function delete($tablename,$param)
     {
-        return parent::delete($param[0], $param[1]);
+        return parent::delete("$tablename",$param[0], $param[1]);
     }
 }
 //  $obj=new TeacherController("teacher");
