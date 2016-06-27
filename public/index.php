@@ -40,11 +40,6 @@ $req=new request($crudvalue,$buttonvalue);
 
 if(isset($_POST['parameter']))
 {
-    $param=$_POST['parameter'];
-    $modname=$_POST['modelname'];
-    $crud=$_POST['crudname'];
-    $obj= new BaseController("$modname");
-    $obj->$crud($param);
-    
+    $req->wrappper();
 }
 ?>

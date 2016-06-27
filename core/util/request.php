@@ -2,8 +2,8 @@
 
 class request
 {
-    public $crud;
-    public $table;
+    private $crud;
+    private $table;
     public function __construct($crud,$table) 
     {
         $this->crud=$crud;
@@ -13,5 +13,13 @@ class request
         {
             $contrlfactory->operation($crud);
         }
+    }
+    public function wrappper()
+    {
+        $param=$_POST['parameter'];
+        $modname=$_POST['modelname'];
+        $crud=$_POST['crudname'];
+        $obj= new BaseController("$modname");
+        $obj->$crud($param);
     }
 }
