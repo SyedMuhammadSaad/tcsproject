@@ -2,25 +2,31 @@
 /**
  * Student list.php file
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Including files
- */
-include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
 /**
  * listing the elements in student table.
  * @param studentController $obj Object made so function can be used
  */
-function listStudent()
-{  
-    echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
-    $contrlrfctry=ControllerFactory::createController("student");
-    $contrlrfctry->setModel("student");
-    $contrlrfctry->read();
+echo "<table><tr><th>Name</th><th>Age</th><th>Degree</th></tr>";
+$size=sizeof($count);
+$size2=count($count[0]);
+if($size>0)
+{
+
+    for($i=0;$i<$size;$i++)
+    {
+        echo '<tr>';
+        for($j=0;$j<$size2;$j++)
+        {
+            echo "<td style='text-align:left'>".$count[$i][$j]."</td>";
+        }
+        echo '</tr>';
+    }
+}
+echo "</table>";
+if($size==0)
+{
+    echo "<b>No Table to be Displayed</b>";
 }
 
 ?>

@@ -1,79 +1,13 @@
-<?php
-/**
- * Adding or Creating new values in teacher,course and student table
- */
-echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
+<html>
+    <body>
+        <h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>
 
-/**
- * Including the files requiered
- */
-include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
-include_once $_SESSION['Root'].'\core\models\modelFactory.php';
-
-//making form and taking inputs
-echo '<form action="#" method="post">';
-$var=$_SESSION["buttonvalue"];
-$contrlrfctry=ControllerFactory::createController("$var");
-$contrlrfctry->setModel("$var");
-if($_SESSION["buttonvalue"]=="course")//if input is course
-{
-    echo '
-            CourseName: <input type="text" name="coursename" placeholder="Course Name"><br>
-            CourseCode: <input type="text" name="coursecode" placeholder="Course Code"><br>
-        ';
-    
-    $courseName = filter_input(INPUT_POST, "coursename");
-    $courseCode = filter_input(INPUT_POST, "coursecode");
-    if($courseName!=NULL && $courseCode!=NULL)
-    {
-        $contrlrfctry->createCourse($courseName, $courseCode);
-        $contrlrfctry->read();
-    }
-    echo '
+        <form action="index.php" method="post">
+        Value: <br> <input type="text" name="parameter[0]"><br>
+        Column: <br><input type="text" name="parameter[1]"><br>
         <input type="submit">
-    </form>';
-}
-else//if input is teacher or student
-{
-    echo '
-            Name: <input type="text" name="name" placeholder="Name"><br>
-            Age: <input type="text" name="age" placeholder="Age"><br>
-        ';
-    if($_SESSION["buttonvalue"]=="teacher")
-    {
-         echo 'Course: <input type="text" name="course" placeholder="Course"><br>';
-    }
-    else
-    {
-        echo 'Degree: <input type="text" name="degree" placeholder="degree"><br>';
-    }
-    echo '
-        <input type="submit">
-    </form>';
-    
-    $name = filter_input(INPUT_POST, "name");
-    $age = filter_input(INPUT_POST, "age");
-    //making object accordingly
-    if($_SESSION["buttonvalue"]=="teacher")
-    {
-        $course = filter_input(INPUT_POST, "course");
-        if($name!=NULL && $age!=NULL && $course!=NULL)
-        {
-            $contrlrfctry->createTeacher($name, $age, $course);
-            $contrlrfctry->read();
-        }
-    }
-    else//making object accordingly
-    {
-        $degree = filter_input(INPUT_POST, "degree");
-        if($name!=NULL && $age!=NULL && $degree!=NULL)
-        {
-            $contrlrfctry->createstudent($name, $age, $degree);
-            $contrlrfctry->read();
-        }
-    }
-}
+        <input type="text" value="<?php echo buttonval;?>" style="display:none;" name="modelname">
+        <input type="text" value="<?php echo crudval;?>" style="display:none;" name="crudname">
+      </form>
+    </body>
+</html>

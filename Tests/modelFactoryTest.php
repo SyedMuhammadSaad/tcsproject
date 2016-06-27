@@ -3,11 +3,6 @@
  * Testing ModelFactory
  */
 
-/**
- * Including files
- */
-include_once '../public/index.php';
-include_once $_SESSION['Root'].'\core\models\modelFactory.php';
 
 /**
  * Testing modelFactory

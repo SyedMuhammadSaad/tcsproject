@@ -12,20 +12,26 @@ interface ControllerInterface
      * Model name
      * @param string $typeofModel
      */
-    function setModel($typeofModel);
+    function __construct($typeofModel);
+    /**
+     * Create table
+     * @param array $param
+     */
+    function create($param);
+    /**
+     * Read table
+     * @param array $param
+     */
+    function read($param);
     /**
      * Update table
-     * @param string $column1
-     * @param string $column2
-     * @param mixed $newvalue
-     * @param mixed $oldvalue
+     * @param array $param
      */
-    function update($column1,$column2,$newvalue,$oldvalue);
+    function update($param);
     /**
      * Delete table
-     * @param string $column1
-     * @param mixed $oldvalue
+     * @param array $param
      */
-    function delete($column1,$oldvalue);
+    function delete($param);
 }
 ?>

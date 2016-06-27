@@ -3,10 +3,6 @@
  * Testing Database
  */
 
-/**
- * Including files
- */
-include_once 'C:\xampp\htdocs\TCS_Project\core\models\database\database.php';
 
 /**
  * databaseTest class tests the database connection

@@ -2,16 +2,10 @@
 /**
  * teacher.php creates TeacherModel class and has functions of CRUD
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Include Database.php
- */
-require_once $_SESSION['Root'].'\core\models\database\database.php';
-require_once $_SESSION['Root'].'\core\models\baseModel.php';
+//require_once Root.d_S.'core'.d_S.'models'.d_S.'baseModel.php';
+require_once Root.d_S.'core'.d_S.'models'.d_S.'database'.d_S.'database.php';
+//require_once 'C:\xampp\htdocs\TCS_Project\core\models\baseModel.php';
+//require_once 'C:\xampp\htdocs\TCS_Project\core\models\database\database.php';
 
 /**
  * TeacherModel class connects with database and executes commands from functions
@@ -69,17 +63,17 @@ class TeacherModel extends BaseModel
     /**
      * Calls function of inserttable from database to create new teacher
      */
-    public function createTeacherRow()
+    public function create($column1,$value1)
     {
-        DBAL::inserttable("teacher",TeacherModel::getName(),TeacherModel::getAge(),TeacherModel::getCourse());
+        DBAL::insert("teacher",$column1,$value1);
     }
     /**
      * Calls function of selecttable from database to read all teachers
      * @return array Returning array of table values
      */
-    public function readTeacherRow()
+    public function read()
     {
-        return DBAL::selecttable("teacher");
+        return DBAL::select("teacher");
     }
     /**
      * Updates the teaher information
@@ -90,7 +84,7 @@ class TeacherModel extends BaseModel
      */
     public function update($column1,$column2,$newvalue,$oldvalue)
     {
-        DBAL::updatetable("teacher",$column1,$column2,$newvalue,$oldvalue);
+        DBAL::update("teacher",$column1,$column2,$newvalue,$oldvalue);
     }
     /**
      * Delete the row from teacher table
@@ -99,9 +93,9 @@ class TeacherModel extends BaseModel
      */
     public function delete($column,$value)
     {
-        DBAL::deletetable("teacher",$column,$value);
+        DBAL::delete("teacher",$column,$value);
     }
 
 }
-
+//TeacherModel::update("Age","Name",30,"Ali Afzal");
 ?>

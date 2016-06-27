@@ -4,12 +4,6 @@
  */
 
 /**
- * Including files
- */
-include_once '../public/index.php';
-include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
-
-/**
  * ControllerFactoryTest class has function which perform test on ControllerFactory
  */
 class ControllerFactoryTest extends PHPUnit_Framework_TestCase

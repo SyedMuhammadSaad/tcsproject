@@ -2,12 +2,8 @@
 /**
  * BaseModel impements from ModelInterface
  */
-
-/**
- * Including files
- */
-require_once $_SESSION['Root'].'\core\models\modelInterface.php';
-
+//require_once 'C:\xampp\htdocs\TCS_Project\core\models\modelInterface.php';
+//require_once Root.d_S.'core'.d_S.'models'.d_S.'modelInterface.php';
 /**
  * BaseModel implements from ModelInterface and defines all the functions
  */

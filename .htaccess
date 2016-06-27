@@ -1,0 +1,15 @@
+# Allows ModRewrie to work
+# Options FollowSymLinks
+# RewriteEngine on
+# RewriteCond %{REQUEST_URI} !=/TCS_Project/public/index.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/generic/add.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/teacher/edit.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/teacher/list.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/teacher/delete.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/student/edit.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/student/list.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/student/delete.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/course/edit.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/course/list.php
+# RewriteCond %{REQUEST_URI} .*\TCS_Project/app/views/course/delete.php
+# RewriteRule . /TCS_Project/public/index.php

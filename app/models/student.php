@@ -2,16 +2,6 @@
 /**
  * student.php creates StudentModel class and has functions of CRUD
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Include Database.php
- */
-require_once $_SESSION['Root'].'\core\models\database\database.php';
-require_once $_SESSION['Root'].'\core\models\baseModel.php';
 
 /**
  * StudentModel class connects with database and executes commands from functions
@@ -69,17 +59,17 @@ class StudentModel extends BaseModel
     /**
      * Calls function of inserttable from database to create new Student
      */
-    public function createStudentRow()
+    public function create($column1,$value1)
     {
-        DBAL::inserttable("student",StudentModel::getName(),StudentModel::getAge(),StudentModel::getDegree());
+        DBAL::insert("student",$column1,$value1);
     }
     /**
      * Calls function of selecttable from database to read all students
      * @return array Returning array of table values
      */
-    public function readStudentRow()
+    public function read()
     {
-        return DBAL::selecttable("student");
+        return DBAL::select("student");
     }
     /**
      * Updates the student information
@@ -90,7 +80,7 @@ class StudentModel extends BaseModel
      */
     public function update($column1,$column2,$newvalue,$oldvalue)
     {
-        DBAL::updatetable("student",$column1,$column2,$newvalue,$oldvalue);
+        DBAL::update("student",$column1,$column2,$newvalue,$oldvalue);
     }
     /**
      * Delete the row from student table
@@ -99,7 +89,7 @@ class StudentModel extends BaseModel
      */
     public function delete($column,$value)
     {
-        DBAL::deletetable("student",$column,$value);
+        DBAL::delete("student",$column,$value);
     }
 
 }

@@ -2,16 +2,6 @@
 /**
  * course.php creates CourseModel class and has functions of CRUD
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Include Database.php
- */
-require_once $_SESSION['Root'].'\core\models\database\database.php';
-require_once $_SESSION['Root'].'\core\models\baseModel.php';
 
 /**
  * CourseModel class connects with database and executes commands from functions
@@ -55,17 +45,17 @@ class CourseModel extends BaseModel
     /**
      * Calls function of inserttable from database to create new Course
      */
-    public function createCourseRow()
+    public function create($column1,$value1)
     {
-        DBAL::inserttable("course",CourseModel::getCourseName(),CourseModel::getCourseCode(),'');
+        DBAL::insert("course",$column1,$value1);
     }
     /**
      * Calls function of selecttable from database to read all courses
      * @return array Returning array of table values
      */
-    public function readCourseRow()
+    public function read()
     {
-        return DBAL::selecttable("course");
+        return DBAL::select("course");
     }
     /**
      * Updates the course information
@@ -76,7 +66,7 @@ class CourseModel extends BaseModel
      */
     public function update($column1,$column2,$newvalue,$oldvalue)
     {
-        DBAL::updatetable("course",$column1,$column2,$newvalue,$oldvalue);
+        DBAL::update("course",$column1,$column2,$newvalue,$oldvalue);
     }
     /**
      * Delete the row from course table
@@ -85,7 +75,7 @@ class CourseModel extends BaseModel
      */
     public function delete($column,$value)
     {
-        DBAL::deletetable("course",$column,$value);
+        DBAL::delete("course",$column,$value);
     }
 
 }

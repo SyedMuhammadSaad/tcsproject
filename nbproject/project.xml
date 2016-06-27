@@ -5,5 +5,11 @@
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
             <name>TCS_Project</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>CoursCoursee</word>
+            <word>CourseCode</word>
+            <word>CourseCourse</word>
+            <word>CourseName</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

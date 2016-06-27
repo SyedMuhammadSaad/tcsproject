@@ -3,11 +3,6 @@
  * Testing teacherController
  */
 
-/**
- * Including files
- */
-include_once '../public/index.php';
-require_once $_SESSION['Root'].'\app\controllers\teacherController.php';
 
 /**
  * Testing teacherController and crud functionalities

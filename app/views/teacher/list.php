@@ -2,26 +2,32 @@
 /**
  * Teacher list.php file
  */
-
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Including files
- */
-include_once $_SESSION['Root'].'\core\controllers\controllerFactory.php';
+echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
+//require_once Root.d_S.'core'.d_S.'controllers'.d_S.'controllerFactory.php';
 /**
  * listing the elements in teacher table.
  * @param teacherController $obj Object made so function can be used
  */
-function listTeacher()
+echo "<table><tr><th>Name</th><th>Age</th><th>Course</th></tr>";
+$size=sizeof($count);
+$size2=count($count[0]);
+if($size>0)
 {
-    echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
-    $contrlrfctry=ControllerFactory::createController("teacher");
-    $contrlrfctry->setModel("teacher");
-    $contrlrfctry->read();
+
+    for($i=0;$i<$size;$i++)
+    {
+        echo '<tr>';
+        for($j=0;$j<$size2;$j++)
+        {
+            echo "<td style='text-align:left'>".$count[$i][$j]."</td>";
+        }
+        echo '</tr>';
+    }
+}
+echo "</table>";
+if($size==0)
+{
+    echo "<b>No Table to be Displayed</b>";
 }
 
 ?>

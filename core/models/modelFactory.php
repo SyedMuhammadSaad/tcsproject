@@ -2,18 +2,8 @@
 /**
  * modelFactory makes the model from course,student or teacher
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Including the models
- */
-include_once $_SESSION['Root'].'\app\models\course.php';
-include_once $_SESSION['Root'].'\app\models\student.php';
-include_once $_SESSION['Root'].'\app\models\teacher.php';
-
+//require_once Root.d_S.'app'.d_S.'models'.d_S.'teacher.php';
+//require_once 'C:\xampp\htdocs\TCS_Project\app\models\teacher.php';
 /**
  * ModelFactory making the model according to they typeofModel passed.
  */
@@ -26,21 +16,14 @@ class ModelFactory
      */
     public static function createModel($type)
     {
-        if($type==="teacher")
+        $className = ucfirst($type)."Model";
+        if($className!=NULL)
         {
-            return new TeacherModel;
-        }
-        else if($type==="student")
-        {
-            return new StudentModel;
-        }
-        else if($type==="course")
-        {
-            return new CourseModel;
+            return new $className;
         }
         else
         {
-            return "Wrong model selected";
+            throw new Exception("$className Not Found!");
         }
     }
 }

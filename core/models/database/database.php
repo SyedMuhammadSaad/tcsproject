@@ -55,20 +55,12 @@ class DBAL
      * @param mixed $value2 Second column
      * @param mixed $value3 Third column if present
      */
-    public function inserttable($modelname,$value1,$value2,$value3)
+    public function insert($modelname,$column,$value1)
     {
         DBAL::connect();
-        $insertquery=NULL;
-        if($modelname=="course")//if model is course table(as it has only 2 columns)
-        {
-            $insertquery="INSERT INTO $modelname VALUES(?,?)";
-            DBAL::connect()->prepare($insertquery)->execute([$value1,$value2]);
-        }
-        else//if model is teacher or student(as they have 3 columns)
-        {
-            $insertquery="INSERT INTO $modelname VALUES(?,?,?)";
-            DBAL::connect()->prepare($insertquery)->execute([$value1,$value2,$value3]);
-        }
+        $insertquery="INSERT INTO {$modelname} ({$column}) VALUES (?);";
+        DBAL::connect()->prepare($insertquery)->execute([$value1]);
+        
     }
     
     /**
@@ -76,27 +68,22 @@ class DBAL
      * @param string $modelname Table name
      * @return array Array of table values
      */
-    public function selecttable($modelname)
+    public function select($modelname)
     {   
         DBAL::connect();
+        $result1 = DBAL::connect()->prepare("select * from $modelname limit 1");
+        $result1->execute();
+        $fields = array_keys($result1->fetch(PDO::FETCH_ASSOC));
         $selectquery="SELECT * FROM $modelname";
         $result=DBAL::connect()->prepare($selectquery);
         $result->execute();
+        $col=0;
         $arr=array();//$arr is 2D array and it will store the values of table
         foreach($result->fetchAll(PDO::FETCH_ASSOC) as $row)
         {
-            if($modelname=="course")//course table has CourseName and CourseCode
+            for($col=0;$col<$result->columnCount();$col++)
             {
-                $arr1=array($row['CourseName'],$row['CourseCode']);
-                          
-            }
-            else if($modelname=="student")//student table has Name,Age and Degree
-            {
-                $arr1=array($row['Name'],$row['Age'],$row['Degree']);       
-            }
-            else//teacher table has Name,Age and Course
-            {
-                $arr1=array($row['Name'],$row['Age'],$row['Course']);
+                $arr1[$col]=$row[$fields[$col]];
             }
             array_push($arr,$arr1);
         }
@@ -110,7 +97,7 @@ class DBAL
      * @param mixed $newvalue New Value
      * @param mixed $oldvalue Value to be updated
      */
-    public function updatetable($modelname,$value1,$value2,$newvalue,$oldvalue)
+    public function update($modelname,$value1,$value2,$newvalue,$oldvalue)
     {
         DBAL::connect();
         $update_query="UPDATE $modelname SET $value1 = ? WHERE $value2 = ?";
@@ -122,10 +109,14 @@ class DBAL
      * @param string $col Column name
      * @param mixed $value Value to be deleted
      */
-    public function deletetable($modelname,$col,$value)
+    public function delete($modelname,$col,$value)
     {
         DBAL::connect();
         $delete_query="DELETE FROM $modelname WHERE $col = ?";
         DBAL::connect()->prepare($delete_query)->execute([$value]);
     }
 }
+//DBAL::update("teacher","Age","Name",28,"Ali Afzal");
+//DBAL::select("teacher");
+//print_r(DBAL::select("student"));
+//DBAL::insert("course","CourseName","CLD");
