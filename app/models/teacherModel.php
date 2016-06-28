@@ -2,13 +2,11 @@
 /**
  * teacher.php creates TeacherModel class and has functions of CRUD
  */
+/**
+ * Namespace used and declared
+ */
 namespace app\models;
 use core\models\BaseModel;
-//require_once Root.d_S.'core'.d_S.'models'.d_S.'baseModel.php';
-//require_once Root.d_S.'core'.d_S.'models'.d_S.'database'.d_S.'database.php';
-//require_once 'C:\xampp\htdocs\TCS_Project\core\models\baseModel.php';
-//require_once 'C:\xampp\htdocs\TCS_Project\core\models\database\database.php';
-
 /**
  * TeacherModel class connects with database and executes commands from functions
  */
@@ -29,10 +27,52 @@ class TeacherModel extends BaseModel
      */
     private $course;
     /**
-     * Empty Constructor
+     *
+     * @var array Array of attributes in model
+     */
+    private $attr;
+    /**
+     * Constructor setting attributes in array $attr
      */
     public function __construct() 
     {
+        $this->attr=array();
+        $this->attr[0]='Name';
+        $this->attr[1]='Age';
+        $this->attr[2]='Course';
+    }
+    /**
+     * The additional attribute if added is set by setAttr function
+     * @param string $value
+     */
+    function setAttr($value)
+    {
+        $value1= ucfirst($value);
+        array_push($this->attr,$value1);
+    }
+    /**
+     * Getting the array of attributes if more attributes are added.
+     * @return array
+     */
+    function getAttr()
+    {
+        return $this->attr;
+    }
+    /**
+     * Removing element from array attr
+     * @param string $value
+     */
+    function removeAttr($value)
+    {
+        for($i=0;$i<sizeof($this->attr);$i++)
+        {
+            if($this->attr[$i]==$value)
+            {
+                unset($this->attr[$i]);
+                $this->attr=  array_values($this->attr);
+                $i=  sizeof($this->array);
+            }
+        }
     }
     /**
      * Name Setter
@@ -83,7 +123,10 @@ class TeacherModel extends BaseModel
         return $this->course;
     }
     /**
-     * Calls function of inserttable from database to create new teacher
+     * Calls function of create from database to create new teacher
+     * @param string $tablename Tablename passed here
+     * @param string $column1
+     * @param mixed $value1
      */
     public function create($tablename,$column1,$value1)
     {
@@ -91,6 +134,7 @@ class TeacherModel extends BaseModel
     }
     /**
      * Calls function of selecttable from database to read all teachers
+     * @param string $tablename Tablename passed here
      * @return array Returning array of table values
      */
     public function read($tablename)
@@ -99,6 +143,7 @@ class TeacherModel extends BaseModel
     }
     /**
      * Updates the teaher information
+     * @param string $tablename Tablename passed here
      * @param string $column1 Column to be changed
      * @param string $column2 Column to be changed
      * @param mixed $newvalue New value
@@ -110,6 +155,7 @@ class TeacherModel extends BaseModel
     }
     /**
      * Delete the row from teacher table
+     * @param string $tablename Tablename passed here
      * @param string $column Column of the table with which value is to be deleted
      * @param mixed $value Value with which to be deleted
      */
@@ -119,5 +165,4 @@ class TeacherModel extends BaseModel
     }
 
 }
-//TeacherModel::update("Age","Name",30,"Ali Afzal");
 ?>

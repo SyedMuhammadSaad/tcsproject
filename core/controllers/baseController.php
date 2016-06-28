@@ -2,6 +2,9 @@
 /**
  * BaseController impements from ControllerInterface
  */
+/**
+ * Namespace declared and used
+ */
 namespace core\controllers;
 use core\controllers\ControllerInterface;
 use core\models\ModelFactory;
@@ -11,38 +14,47 @@ use core\models\ModelFactory;
 class BaseController implements ControllerInterface
 {
     /**
-     * Gets the type of model to use the parameters accordingly.
-     * @var modelFactory 
+     * Sets the model according to controller
+     * @var |\StudentModel|\TeacherModel|\CourseModel 
      */
     private $model;
     /**
-     * Set value of model
+     * Setting the modeltype required
      * @param string $typeofModel
+     * @return |\StudentModel|\TeacherModel|\CourseModel
      */
     function __construct($typeofModel) 
     {
         $obj=new ModelFactory;
         return $this->model=$obj->createModel($typeofModel);
     }
+    /**
+     * Selects the operation and calls the view accordingly
+     * @param string $opr
+     * @param string $func
+     */
     function operation($opr,$func)
     {
-        if($opr=="create")
+        $modl=$this->model;
+        if($opr=="add")//if add then calls the generic add view
         {
-            require_once Root.d_S.'app'.d_S.'views'.d_S.'generic'.d_S.'add.php';
+            require_once Root.d_S.'app'.d_S.'views'.d_S.'generic'.d_S.$opr.'.php';
         }
-        else if($opr=="read")
+        else//else calls the respective views
         {
-            $this->read($func,NULL);
-        }
-        else if($opr=="update")
-        {
-            require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.'edit.php';
-        }
-        else if($opr=="delete")
-        {
-            require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.'delete.php';
+            if($opr=="list")
+            {
+                $count=$this->read($func,NULL);
+            }
+            require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.$opr.'.php';
         }
     }
+    /**
+     * Create function calls the respective controller create function
+     * @param string $tablename
+     * @param array $param
+     * @return boolean
+     */
     function create($tablename,$param)
     {
         if($param==NULL)
@@ -57,18 +69,20 @@ class BaseController implements ControllerInterface
         
     }
     /**
-     * Read of Controller is called.
+     * Read function calls the respective controllers read function
+     * @param string $tablename
+     * @param array $param Null in read case
+     * @return array
      */
     function read($tablename,$param)
     {
-        $this->model->read("$tablename",$param);
+        return $this->model->read("$tablename",$param);
+        
     }
     /**
-     * Updates Table
-     * @param string $column1 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param mixed $newvalue Value which is going to be set in place of old value
-     * @param mixed $oldvalue Value to be replaced
+     * Update function calls the respective controllers update function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
     function update($tablename,$param) 
@@ -84,9 +98,9 @@ class BaseController implements ControllerInterface
         }
     }
     /**
-     * Deleted the row from table.
-     * @param string $column Column Name
-     * @param mixed $value Value with which row to be deleted
+     * Delete function calls the respective controllers delete function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
     function delete($tablename,$param) 

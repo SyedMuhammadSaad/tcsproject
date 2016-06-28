@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -17,9 +13,9 @@ and open the template in the editor.
             <input type="radio" name="buttonchoice" value="teacher"> Teacher<br>
             <input type="radio" name="buttonchoice" value="student"> Student<br>
             <input type="radio" name="buttonchoice" value="course"> Course<br>
-            <button name="crud" value="create" type="submit">Create</button>
-            <button name="crud" value="read" type="submit">Read</button>
-            <button name="crud" value="update" type="submit">Update</button>
+            <button name="crud" value="add" type="submit">Create</button>
+            <button name="crud" value="list" type="submit">Read</button>
+            <button name="crud" value="edit" type="submit">Update</button>
             <button name="crud" value="delete" type="submit">Delete</button><br>
         <?php
         /**
@@ -28,9 +24,14 @@ and open the template in the editor.
         
         $crudvalue = filter_input(INPUT_POST, "crud");//input for crud is saved here
         $buttonvalue = filter_input(INPUT_POST, "buttonchoice");//input for table formed is saved here
-        $addpagebutton=$buttonvalue;
         
+        /**
+         * Defining constant value of buttonvalue
+         */
         define("buttonval",$buttonvalue);
+        /**
+         * Defining constant value of crudvalue
+         */
         define("crudval",$crudvalue);
         
         ?>

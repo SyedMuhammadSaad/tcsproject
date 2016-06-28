@@ -2,6 +2,9 @@
 /**
  * StudentController gets model accordingly and perform different functions.
  */
+/**
+ * Namespace used and declared
+ */
 namespace app\controllers;
 use core\controllers\BaseController;
 /**
@@ -10,22 +13,23 @@ use core\controllers\BaseController;
 class CourseController extends BaseController
 {
     /**
-     * Gets the type of model to use the parameters accordingly.
-     * @var modelFactory 
+     * Sets the model according to controller
+     * @var |\StudentModel|\TeacherModel|\CourseModel 
      */
     private $model;
     /**
-     * Set value of model
+     * Parent is setting the modeltype required
      * @param string $typeofModel
+     * @return |\StudentModel|\TeacherModel|\CourseModel
      */
     public function __construct($typeofModel)
     {
         $this->model=parent::__construct($typeofModel);
     }
     /**
-     * Course is created by putting in the information.
-     * @param string $column1 Column of the course.
-     * @param string $value1 Value of the course.
+     * Create function calls the respective controller create function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
     public function create($tablename,$param)
@@ -39,32 +43,31 @@ class CourseController extends BaseController
             $this->model->create("$tablename",$param[0],$param[1]);
             return true;
         }
-        
     }
     /**
-     * All of the courses are shown or read from table.
+     * Read function calls the respective controllers read function
+     * @param string $tablename
+     * @param array $param Null in read case
+     * @return array
      */
     public function read($tablename,$param)
     {
-        $count=$this->model->read("$tablename");
-        require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.'list.php';
+        return $this->model->read("$tablename");
     }
     /**
-     * Updates Table
-     * @param string $column1 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param mixed $newvalue Value which is going to be set in place of old value
-     * @param mixed $oldvalue Value to be replaced
+     * Update function calls the respective controllers update function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    public function update($tablename,$param)//Update table set column1 = newvalue where column2 = oldvalue
+    public function update($tablename,$param)
     {
         return parent::update("$tablename",$param[0],$param[1], $param[2], $param[3]);
     }
     /**
-     * Deleted the row from table.
-     * @param string $column Column Name
-     * @param mixed $value Value with which row to be deleted
+     * Delete function calls the respective controllers delete function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
     public function delete($tablename,$param)
@@ -72,6 +75,4 @@ class CourseController extends BaseController
         return parent::delete("$tablename",$param[0], $param[1]);
     }
 }
-
 ?>
-

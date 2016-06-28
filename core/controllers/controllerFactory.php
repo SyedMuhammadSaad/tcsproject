@@ -11,7 +11,7 @@ class ControllerFactory
     /**
      * Factory Method implemented
      * @param string $type Type of button pressed is passed here to select controller
-     * @return string|\StudentController|\TeacherController|\CourseController
+     * @return \core\controllers\className Returns StudentController or TeacherController or CourseController
      */
     public static function createController($type) 
     {
@@ -20,7 +20,7 @@ class ControllerFactory
         {
             return new $className($type);
         }
-        else if($className=="Controller")
+        else if($className=="Controller")//if no controller is set
         {
             echo "$className Not Found!";
         }

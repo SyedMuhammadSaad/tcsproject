@@ -2,6 +2,9 @@
 /**
  * Database connection formed with insert,update,delete and select queries
  */
+/**
+ * Namespace declared here
+ */
 namespace core\models\database;
 /**
  * DBAL singleton class connects with PDO database
@@ -50,10 +53,9 @@ class DBAL
     
     /**
      * Insertion command executes here
-     * @param string $modelname Table name
-     * @param mixed $value1 First column
-     * @param mixed $value2 Second column
-     * @param mixed $value3 Third column if present
+     * @param string $modelname The name of model
+     * @param string $column The name of the column
+     * @param mixed $value1 The value to be inserted
      */
     public function insert($modelname,$column,$value1)
     {
@@ -137,7 +139,3 @@ class DBAL
         }
     }
 }
-//DBAL::update("teacher","Age","Name",28,"Ali Afzal");
-//DBAL::select("teacher");
-//print_r(DBAL::select("student"));
-//DBAL::insert("course","CourseName","CLD");

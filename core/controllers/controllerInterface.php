@@ -2,6 +2,9 @@
 /**
  * ControllerInterface has functions of update and delete
  */
+/**
+ * Namespace declared
+ */
 namespace core\controllers;
 /**
  * ControllerInterface has pure virtual functions.
@@ -15,21 +18,25 @@ interface ControllerInterface
     function __construct($typeofModel);
     /**
      * Create table
+     * @param string $tablename
      * @param array $param
      */
     function create($tablename,$param);
     /**
      * Read table
+     * @param string $tablename
      * @param array $param
      */
     function read($tablename,$param);
     /**
      * Update table
+     * @param string $tablename
      * @param array $param
      */
     function update($tablename,$param);
     /**
      * Delete table
+     * @param string $tablename
      * @param array $param
      */
     function delete($tablename,$param);
