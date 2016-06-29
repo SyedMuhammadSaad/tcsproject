@@ -15,7 +15,7 @@ class ControllerFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function providertestContollerFactory()
     {
-        return array(array("course"),array("teacher"),array("professor"));
+        return array(array("course"),array("teacher"));
     }
     /**
      * ControllerFactory tested here
@@ -25,8 +25,8 @@ class ControllerFactoryTest extends PHPUnit_Framework_TestCase
     public function testContollerFactory($type)
     {
         $obj=new ControllerFactory;
-        $val=ucfirst($type);
-        $this->assertEquals($val."Controller",$obj->createController($type));
+        $val=new \app\controllers\CourseController("$type");
+        $this->assertEquals($val,$obj->createController($type));
     }
 }
 
