@@ -10,9 +10,9 @@
         echo '<i>Columns are|';
         for($i=0;$i<sizeof($col);$i++)
         {
-            echo $col[$i].'|'.'</i>';
+            echo $col[$i].'|';
         }
-        echo ':';
+        echo '</i>:';
         ?>
         <br>
         Column: <br><input type="text" name="parameter[1]"><br>

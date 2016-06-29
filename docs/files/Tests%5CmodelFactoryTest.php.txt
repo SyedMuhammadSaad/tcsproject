@@ -16,7 +16,7 @@ class ModelFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function providertestModelFactory()
     {
-        return array(array("student"),array("apprentice"));
+        return array(array("student"),array("teacher"));
     }
     /**
      * Testing ModelFactory
@@ -26,8 +26,8 @@ class ModelFactoryTest extends PHPUnit_Framework_TestCase
     public function testModelFactory($type)
     {
         $obj= new ModelFactory;
-        $val=ucfirst($type);
-        $this->assertEquals($val."Model", $obj->createModel($type));
+        $val=new \app\models\StudentModel("$type");
+        $this->assertEquals($val, $obj->createModel($type));
     }
 }
 

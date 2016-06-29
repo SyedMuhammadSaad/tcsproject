@@ -4,7 +4,7 @@
  * Testing Rquest
  */
 //require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
-//use core\util\Request;
+use core\util\Request;
 /**
  * requesTest class tests the request.php
  */
@@ -16,7 +16,7 @@ class requestTest extends PHPUnit_Framework_TestCase
      */
     public function providertestRequest()
     {
-        return array(array(NULL,"course"),array(NULL,"teacher"),array(NULL,"professor"));
+        return array(array("list","course"),array("list","teacher"));
     }
     /**
      * ControllerFactory tested here

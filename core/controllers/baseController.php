@@ -46,7 +46,7 @@ class BaseController implements ControllerInterface
             {
                 $count=$this->read($func,NULL);
             }
-            require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.$opr.'.php';
+            require_once Root.d_S.'app'.d_S.'views'.d_S.$func.d_S.$opr.'.php';
         }
     }
     /**

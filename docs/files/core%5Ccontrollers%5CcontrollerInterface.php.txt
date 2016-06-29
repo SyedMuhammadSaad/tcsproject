@@ -21,7 +21,7 @@ interface ControllerInterface
      * @param string $tablename
      * @param array $param
      */
-    function create($tablename,$param);
+    function add($tablename,$param);
     /**
      * Read table
      * @param string $tablename
@@ -33,7 +33,7 @@ interface ControllerInterface
      * @param string $tablename
      * @param array $param
      */
-    function update($tablename,$param);
+    function edit($tablename,$param);
     /**
      * Delete table
      * @param string $tablename
