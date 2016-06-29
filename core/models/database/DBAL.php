@@ -46,7 +46,7 @@ class DBAL
                 \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_EMULATE_PREPARES   => false
             ];
-            self::$connection=new \PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASSWORD,$opt);
+            self::$connection=new \PDO(DB_TYPE.':host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASSWORD,$opt);
         }
         return self::$connection;
     }

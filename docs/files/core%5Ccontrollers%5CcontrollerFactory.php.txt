@@ -2,19 +2,7 @@
 /**
  * Controller Factory implemented here. Making objects according to input.
  */
-
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
-/**
- * Including files so controller can select which class to return
- */
-require_once $_SESSION['Root'].'\app\controllers\teacherController.php';
-require_once $_SESSION['Root'].'\app\controllers\studentController.php';
-require_once $_SESSION['Root'].'\app\controllers\courseController.php';
-
+namespace core\controllers;
 /**
  * ControllerFactory make the controller according to the parameter passed
  */
@@ -23,31 +11,21 @@ class ControllerFactory
     /**
      * Factory Method implemented
      * @param string $type Type of button pressed is passed here to select controller
-     * @return string|\StudentController|\TeacherController|\CourseController
+     * @return \core\controllers\className Returns StudentController or TeacherController or CourseController
      */
     public static function createController($type) 
     {
-        if($type==="teacher")
+        $className = 'app'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
+        if(isset($type))
         {
-            return new TeacherController;//returning control to TeacherController
+            return new $className($type);
         }
-        else if($type==="student")
+        else if($className=="Controller")//if no controller is set
         {
-            return new StudentController;//returning control to StudentController
-        }
-        else if($type==="course")
-        {
-            return new CourseController;//returning control to CourseController
-        }
-        else
-        {
-            return "Wrong Type Selected";//if wrong type is seleceted echo the wrong selection
+            echo "$className Not Found!";
         }
     }
-    
 }
-
-
 ?>
 
 

@@ -2,66 +2,40 @@
 /**
  * ModelInterface has functions with all setter and getter
  */
-
+namespace core\models;
 /**
  * ModelInterface has pure virtual functions.
  */
 interface ModelInterface
 {
     /**
-     * Name Setter
-     * @param string $name
+     * Create model
+     * @param string $tablename Tablename passed here
+     * @param string $column1
+     * @param mixed $value1
      */
-    function setName($name);
+    function create($tablename,$column1,$value1);
     /**
-     * Name Getter
+     * Read model
+     * @param string $tablename Tablename passed here
      */
-    function getName();
+    function read($tablename);
     /**
-     * Age Setter
-     * @param int $age
+     * Update model
+     * @param string $tablename Tablename passed here
+     * @param string $column1
+     * @param string $column2
+     * @param mixed $newvalue
+     * @param mixed $oldvalue
      */
-    function setAge($age);
+    function update($tablename,$column1,$column2,$newvalue,$oldvalue);
     /**
-     * Age Getter
+     * Delete model
+     * @param string $tablename Tablename passed here
+     * @param string $column
+     * @param mixed $value
      */
-    function getAge();
-    /**
-     * Course Setter
-     * @param string $course
-     */
-    function setCourse($course);
-    /**
-     * Course Getter
-     */
-    function getCourse();
-    /**
-     * Degree Setter
-     * @param string $degree
-     */
-    function setDegree($degree);
-    /**
-     * Degree Getter
-     */
-    function getDegree();
-    /**
-     * CourseName Setter
-     * @param string $courseName
-     */
-    function setCourseName($courseName);
-    /**
-     * CourseName Getter
-     */
-    function getCourseName();
-    /**
-     * CourseCode Setter
-     * @param string $courseCode
-     */
-    function setcourseCode($courseCode);
-    /**
-     * CourseCode Getter
-     */
-    function getCourseCode();
+    function delete($tablename,$column,$value);
 }
 
 ?>

@@ -2,7 +2,8 @@
 /**
  * Testing ModelFactory
  */
-
+//require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
+use core\models\ModelFactory;
 
 /**
  * Testing modelFactory
@@ -25,7 +26,8 @@ class ModelFactoryTest extends PHPUnit_Framework_TestCase
     public function testModelFactory($type)
     {
         $obj= new ModelFactory;
-        $this->assertNotEquals("Wrong model selected", $obj->createModel($type));
+        $val=ucfirst($type);
+        $this->assertEquals($val."Model", $obj->createModel($type));
     }
 }
 

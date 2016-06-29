@@ -2,7 +2,8 @@
 /**
  * Testing ControllerFactory
  */
-
+//require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
+use core\controllers\ControllerFactory;
 /**
  * ControllerFactoryTest class has function which perform test on ControllerFactory
  */
@@ -24,7 +25,8 @@ class ControllerFactoryTest extends PHPUnit_Framework_TestCase
     public function testContollerFactory($type)
     {
         $obj=new ControllerFactory;
-        $this->assertNotEquals("Wrong Type Selected",$obj->createController($type));
+        $val=ucfirst($type);
+        $this->assertEquals($val."Controller",$obj->createController($type));
     }
 }
 

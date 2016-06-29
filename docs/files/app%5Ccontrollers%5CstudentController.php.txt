@@ -2,101 +2,77 @@
 /**
  * StudentController gets model accordingly and perform different functions.
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
 /**
- * Including modelFactory to create model according to student.
+ * Namespace used and declared
  */
-include_once $_SESSION['Root'].'\core\models\modelFactory.php';
-include_once $_SESSION['Root'].'\core\controllers\baseController.php';
+namespace app\controllers;
+use core\controllers\BaseController;
 /**
  * StudentController class has CRUD functionality.
  */
 class StudentController extends BaseController
 {
     /**
-     * Gets the type of model to use the parameters accordingly.
-     * @var modelFactory 
+     * Sets the model according to controller
+     * @var |\StudentModel|\TeacherModel|\CourseModel 
      */
     private $model;
     /**
-     * Set value of model
+     * Parent is setting the modeltype required
      * @param string $typeofModel
+     * @return |\StudentModel|\TeacherModel|\CourseModel
      */
-    public function setModel($typeofModel)
+    public function __construct($typeofModel)
     {
-        $this->model=parent::setModel($typeofModel);
+        $this->model=parent::__construct($typeofModel);
     }
     /**
-     * Student is created by putting in the information.
-     * @param string $name Name
-     * @param int $age Age
-     * @param string $degree Degree Name
+     * Create function calls the respective controller create function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    public function createstudent($name,$age,$degree)
+    public function create($tablename,$param)
     {
-        if($name==NULL || $age==NULL || $degree==NULL)
+        if($param==NULL)
         {
             return false;
         }
         else
         {
-            $this->model->setName("$name");
-            $this->model->setAge($age);
-            $this->model->setDegree("$degree");
-            $this->model->createStudentRow();
+            $this->model->create("$tablename",$param[0],$param[1]);
             return true;
         }
     }
     /**
-     * All of the student are shown or read from table.
+     * Read function calls the respective controllers read function
+     * @param string $tablename
+     * @param array $param Null in read case
+     * @return array
      */
-    public function read()
+    public function read($tablename,$param)
     {
-        $count=$this->model->readStudentRow();
-        echo "<table><tr><th>Name</th><th>Age</th><th>Degree</th></tr>";
-        $size=sizeof($count);
-        if($size>0)
-        {
-            for($i=0;$i<$size;$i++)
-            {
-                echo "<tr><td style='text-align:left'>".$count[$i][0]."</td><td style='text-align:center'>".$count[$i][1]."</td><td style='text-align:left'>".$count[$i][2]."</td></tr>";
-
-            }
-        }
-        echo "</table>";
-        if($size==0)
-        {
-            echo "<b>No Table to be Displayed</b>";
-        }
+        return $this->model->read("$tablename");
     }
     /**
-     * Updates Table
-     * @param string $column1 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param mixed $newvalue Value which is going to be set in place of old value
-     * @param mixed $oldvalue Value to be replaced
+     * Update function calls the respective controllers update function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    public function updatestudent($column1,$column2,$newvalue,$oldvalue)//Update table set column1 = newvalue where column2 = oldvalue
+    public function update($tablename,$param)
     {
-        return parent::update($column1, $column2, $newvalue, $oldvalue);
+        return parent::update("$tablename",$param[0],$param[1], $param[2], $param[3]);
     }
     /**
-     * Deleted the row from table.
-     * @param string $column Column Name
-     * @param mixed $value Value with which row to be deleted
+     * Delete function calls the respective controllers delete function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    public function deletestudent($column, $value)
+    public function delete($tablename,$param)
     {
-        return parent::delete($column, $value);
+        return parent::delete("$tablename",$param[0], $param[1]);
     }
 }
-
 ?>
-

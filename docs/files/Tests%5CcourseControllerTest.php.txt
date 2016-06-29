@@ -3,11 +3,6 @@
  * Testing courseController
  */
 
-/**
- * Including files
- */
-include_once '../public/index.php';
-require_once $_SESSION['Root'].'\app\controllers\courseController.php';
 
 /**
  * Testing courseController and crud functionalities

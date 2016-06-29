@@ -2,69 +2,118 @@
 /**
  * BaseController impements from ControllerInterface
  */
-
 /**
- * Including files
+ * Namespace declared and used
  */
-include_once $_SESSION['Root'].'\core\models\modelFactory.php';
-require_once $_SESSION['Root'].'\core\controllers\controllerInterface.php';
-
+namespace core\controllers;
+use core\controllers\ControllerInterface;
+use core\models\ModelFactory;
 /**
  * BaseController implements from ControllerInterface and defines all the functions
  */
 class BaseController implements ControllerInterface
 {
     /**
-     * Gets the type of model to use the parameters accordingly.
-     * @var modelFactory 
+     * Sets the model according to controller
+     * @var |\StudentModel|\TeacherModel|\CourseModel 
      */
     private $model;
     /**
-     * Set value of model
+     * Setting the modeltype required
      * @param string $typeofModel
+     * @return |\StudentModel|\TeacherModel|\CourseModel
      */
-    function setModel($typeofModel) 
+    function __construct($typeofModel) 
     {
-        return $this->model=ModelFactory::createModel($typeofModel);
+        $obj=new ModelFactory;
+        return $this->model=$obj->createModel($typeofModel);
     }
     /**
-     * Updates Table
-     * @param string $column1 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param string $column2 Column name as in query Update table set column1 = newvalue where column2 = oldvalue
-     * @param mixed $newvalue Value which is going to be set in place of old value
-     * @param mixed $oldvalue Value to be replaced
+     * Selects the operation and calls the view accordingly
+     * @param string $opr
+     * @param string $func
+     */
+    function operation($opr,$func)
+    {
+        $modl=$this->model;
+        if($opr=="add")//if add then calls the generic add view
+        {
+            require_once Root.d_S.'app'.d_S.'views'.d_S.'generic'.d_S.$opr.'.php';
+        }
+        else//else calls the respective views
+        {
+            if($opr=="list")
+            {
+                $count=$this->read($func,NULL);
+            }
+            require_once Root.d_S.'app'.d_S.'views'.d_S.buttonval.d_S.$opr.'.php';
+        }
+    }
+    /**
+     * Create function calls the respective controller create function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    function update($column1, $column2, $newvalue, $oldvalue) 
+    function create($tablename,$param)
     {
-        if($column1==NULL || $column2==NULL || $newvalue==NULL || $oldvalue==NULL)
+        if($param==NULL)
         {
             return false;
         }
         else
         {
-            $this->model->update($column1,$column2, $newvalue, $oldvalue);
+            $this->model->create("$tablename",$param[1],$param[0]);
+            return true;
+        }
+        
+    }
+    /**
+     * Read function calls the respective controllers read function
+     * @param string $tablename
+     * @param array $param Null in read case
+     * @return array
+     */
+    function read($tablename,$param)
+    {
+        return $this->model->read("$tablename",$param);
+        
+    }
+    /**
+     * Update function calls the respective controllers update function
+     * @param string $tablename
+     * @param array $param
+     * @return boolean
+     */
+    function update($tablename,$param) 
+    {
+        if($param==NULL)
+        {
+            return false;
+        }
+        else
+        {
+            $this->model->update("$tablename",$param[0],$param[1], $param[2], $param[3]);
             return true;
         }
     }
     /**
-     * Deleted the row from table.
-     * @param string $column Column Name
-     * @param mixed $value Value with which row to be deleted
+     * Delete function calls the respective controllers delete function
+     * @param string $tablename
+     * @param array $param
      * @return boolean
      */
-    function delete($column, $value) 
+    function delete($tablename,$param) 
     {
-        if($column==NULL || $value==NULL)
+        if($param==NULL)
         {
             return false;
         }
         else
         {
-            $this->model->delete($column, $value);
+            $this->model->delete("$tablename",$param[0], $param[2]);
             return true;
         }
     }
 }
-
 ?>

@@ -29,6 +29,7 @@ class Request
      * Contructor setting values of crud and table
      * @param string $crud
      * @param string $table
+     * @return StudentController|\TeacherController|\CourseController
      */
     public function __construct($crud,$table) 
     {
@@ -40,6 +41,7 @@ class Request
         {
             $contrlfactory->operation($crud,$table);//calling operation which will call related view file
         }
+        return $contrlfactory;
     }
     /**
      * wrapper function wraps up the main project working

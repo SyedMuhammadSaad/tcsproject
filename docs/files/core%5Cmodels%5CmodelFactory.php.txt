@@ -2,18 +2,10 @@
 /**
  * modelFactory makes the model from course,student or teacher
  */
-if(session_status()!=PHP_SESSION_ACTIVE)
-        {
-            session_start();
-        }
-
 /**
- * Including the models
+ * Namespace declared
  */
-include_once $_SESSION['Root'].'\app\models\course.php';
-include_once $_SESSION['Root'].'\app\models\student.php';
-include_once $_SESSION['Root'].'\app\models\teacher.php';
-
+namespace core\models;
 /**
  * ModelFactory making the model according to they typeofModel passed.
  */
@@ -22,25 +14,18 @@ class ModelFactory
     /**
      * Factory method of model return model
      * @param string $type $type is passed to createModel factory to return model
-     * @return string|\StudentModel|\TeacherModel|\CourseModel
+     * @return \core\models\className Returns StudentModel or TeacherModel or CourseModel
      */
     public static function createModel($type)
     {
-        if($type==="teacher")
+        $className = 'app'.d_S.'models'.d_S.ucfirst($type)."Model";
+        if($className!=NULL)
         {
-            return new TeacherModel;
-        }
-        else if($type==="student")
-        {
-            return new StudentModel;
-        }
-        else if($type==="course")
-        {
-            return new CourseModel;
+            return new $className;
         }
         else
         {
-            return "Wrong model selected";
+            echo "$className Not Found!";
         }
     }
 }

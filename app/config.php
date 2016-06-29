@@ -18,3 +18,7 @@ define('DB_PASSWORD', '');
  * Database host
  */
 define("DB_HOST", 'localhost');
+/**
+ * Database type
+ */
+define("DB_TYPE", 'mysql');
