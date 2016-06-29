@@ -26,7 +26,7 @@ class requestTest extends PHPUnit_Framework_TestCase
     public function testRequest($opr,$type)
     {
         
-        $val=ucfirst($type);
-        $this->assertEquals($val."Controller",$obj=new core\util\Request($opr, $type));
+        $val=new \app\controllers\TeacherController("teacher");
+        $this->assertEquals($val,$obj=new core\util\Request($opr, $type));
     }
 }
