@@ -50,12 +50,12 @@ class BaseController implements ControllerInterface
         }
     }
     /**
-     * Create function calls the respective controller create function
+     * Add function calls the respective controller create function
      * @param string $tablename
      * @param array $param
      * @return boolean
      */
-    function create($tablename,$param)
+    function add($tablename,$param)
     {
         if($param==NULL)
         {
@@ -80,12 +80,12 @@ class BaseController implements ControllerInterface
         
     }
     /**
-     * Update function calls the respective controllers update function
+     * Edit function calls the respective controllers update function
      * @param string $tablename
      * @param array $param
      * @return boolean
      */
-    function update($tablename,$param) 
+    function edit($tablename,$param) 
     {
         if($param==NULL)
         {
