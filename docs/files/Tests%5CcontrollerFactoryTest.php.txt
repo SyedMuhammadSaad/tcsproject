@@ -2,7 +2,7 @@
 /**
  * Testing ControllerFactory
  */
-//require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
+require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
 use core\controllers\ControllerFactory;
 /**
  * ControllerFactoryTest class has function which perform test on ControllerFactory

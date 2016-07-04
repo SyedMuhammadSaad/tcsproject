@@ -21,7 +21,7 @@ class ModelFactory
         $className = 'app'.d_S.'models'.d_S.ucfirst($type)."Model";
         if($className!=NULL)
         {
-            return new $className;
+            return new $className($type);
         }
         else
         {

@@ -6,6 +6,10 @@
  * Namespace declared here
  */
 namespace core\models\database;
+
+
+//global $dbcon;
+
 /**
  * DBAL singleton class connects with PDO database
  */
@@ -40,13 +44,14 @@ class DBAL
      */
     public static function connect()
     {
+        require_once Root.d_S.'app'.d_S.'config.php';
         if (self::$connection==null) 
         {
             $opt = [
                 \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_EMULATE_PREPARES   => false
             ];
-            self::$connection=new \PDO(DB_TYPE.':host='.DB_HOST.';dbname='.DB_NAME,DB_USER,DB_PASSWORD,$opt);
+            self::$connection=new \PDO($dbcon['DB_TYPE'].':host='.$dbcon['DB_HOST'].';dbname='.$dbcon['DB_NAME'],$dbcon['DB_USER'],$dbcon['DB_PASSWORD'],$opt);
         }
         return self::$connection;
     }

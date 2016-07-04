@@ -1,14 +1,10 @@
 <?php
 /**
- * Teacher list.php file
+ * Genericlist.php file
  */
 echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>';
-//require_once Root.d_S.'core'.d_S.'controllers'.d_S.'controllerFactory.php';
-/**
- * listing the elements in teacher table.
- * @param teacherController $obj Object made so function can be used
- */
-$col=$modl->getAttr();
+
+$col=$modl->__get("attr");
 echo "<table><tr>";
 for($i=0;$i<sizeof($col);$i++)
 {

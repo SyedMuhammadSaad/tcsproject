@@ -8,6 +8,7 @@
 namespace core\controllers;
 use core\controllers\ControllerInterface;
 use core\models\ModelFactory;
+
 /**
  * BaseController implements from ControllerInterface and defines all the functions
  */
@@ -25,29 +26,35 @@ class BaseController implements ControllerInterface
      */
     function __construct($typeofModel) 
     {
-        $obj=new ModelFactory;
-        return $this->model=$obj->createModel($typeofModel);
+        if($typeofModel!="default" && $typeofModel!="home")
+        {
+            $obj=new ModelFactory;
+            return $this->model=$obj->createModel($typeofModel);
+        }
+    }
+    /**
+     * Home or Default Controller ses this function
+     * @param string $val home or default
+     * @param mixed $buttonvalue This value is passed in case of DefaultController
+     */
+    public function call($val,$buttonvalue = NULL) 
+    {
+        $controller=$val;
+        require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
     }
     /**
      * Selects the operation and calls the view accordingly
-     * @param string $opr
-     * @param string $func
+     * @param string $opr CRUD
+     * @param string $func Teacher, Student or Course
      */
     function operation($opr,$func)
     {
-        $modl=$this->model;
-        if($opr=="add")//if add then calls the generic add view
+        if($opr=="read")
         {
-            require_once Root.d_S.'app'.d_S.'views'.d_S.'generic'.d_S.$opr.'.php';
+            $count=$this->read($func);
         }
-        else//else calls the respective views
-        {
-            if($opr=="list")
-            {
-                $count=$this->read($func,NULL);
-            }
-            require_once Root.d_S.'app'.d_S.'views'.d_S.$func.d_S.$opr.'.php';
-        }
+        require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
+        
     }
     /**
      * Add function calls the respective controller create function
@@ -63,7 +70,8 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->create("$tablename",$param[1],$param[0]);
+            $this->model->__set($param[1],$param[0]);
+            $this->model->create("$tablename",$param[1]);
             return true;
         }
         
@@ -74,7 +82,7 @@ class BaseController implements ControllerInterface
      * @param array $param Null in read case
      * @return array
      */
-    function read($tablename,$param)
+    function read($tablename,$param = NULL)
     {
         return $this->model->read("$tablename",$param);
         
@@ -93,7 +101,9 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->update("$tablename",$param[0],$param[1], $param[2], $param[3]);
+            $this->model->__set($param[0],$param[2]);
+            $this->model->__set($param[1],$param[3]);
+            $this->model->update("$tablename",$param[0],$param[1]);
             return true;
         }
     }
@@ -111,7 +121,8 @@ class BaseController implements ControllerInterface
         }
         else
         {
-            $this->model->delete("$tablename",$param[0], $param[2]);
+            $this->model->__set($param[0],$param[2]);
+            $this->model->delete("$tablename",$param[0]);
             return true;
         }
     }
