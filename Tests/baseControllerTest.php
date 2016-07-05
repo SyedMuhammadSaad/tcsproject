@@ -1,0 +1,142 @@
+<?php
+/**
+ * Testing BaseController
+ */
+use core\controllers\BaseController;
+use core\models\database\DBAL;
+/**
+ * Testing BaseController
+ */
+class BaseControllerTest extends PHPUnit_Framework_TestCase
+{
+    /**
+     * Returning array of arrays to test testBaseController class
+     * @return array
+     */
+    public function providertestBaseController()
+    {
+        return array(array("student"),array("teacher"));
+    }
+    /**
+     * Testing BaseController
+     * @param string $type model Name passed here
+     * @dataProvider providertestBaseController
+     */
+    public function testBaseController($type)
+    {
+        $obj= new BaseController($type);
+        $val=new \app\models\StudentModel("$type");
+        $this->assertEquals($val, $obj->model);
+    }
+    /**
+     * Returning array of arrays to test testCall class
+     * @return array
+     */
+    public function providertestCall()
+    {
+        return array(array("default"),array("home"));
+    }
+    /**
+     * Testing Call
+     * @param string $type model Name passed here
+     * @dataProvider providertestCall
+     */
+    public function testCall($type)
+    {
+        $obj= new BaseController($type);
+        $this->assertEquals(true, $obj->call($type));
+    }
+    /**
+     * Returning array of arrays to test testOperation class
+     * @return array
+     */
+    public function providertestOperation()
+    {
+        return array(array("read","teacher"),array("read","student"));
+    }
+    /**
+     * Testing Operation
+     * @param string $type model Name passed here
+     * @dataProvider providertestOperation
+     */
+    public function testOperation($opr,$type)
+    {
+        $obj= new BaseController($type);
+        $this->assertEquals(true, $obj->operation($opr,$type));
+    }
+    /**
+     * Returning array of arrays to testSelect
+     * @return array
+     */
+    public function providertestSelect()
+    {
+        return array(array("teacher"),array("student"));
+    }
+    /**
+     * Test Select of DBAL
+     * @param string $modelname
+     * @dataProvider providertestSelect
+     */
+    public function testSelect($modelname)
+    {
+        $obj= new BaseController($modelname);
+        $size=  $obj->read($modelname);
+        $this->assertEquals($size, $obj->read($modelname));
+    }
+    /**
+     * Returning array of arrays to testInsert
+     * @return array
+     */
+    public function providertestInsert()
+    {
+        return array(array("teacher",NULL),array("student",NULL));
+    }
+    /**
+     * Test Insert of DBAL
+     * @param string $modelname
+     * @param mixed $val
+     * @dataProvider providertestInsert
+     */
+    public function testInsert($modelname,$val)
+    {
+        $obj= new BaseController($modelname);
+        $this->assertEquals(false, $obj->add($modelname, $val));
+    }
+    /**
+     * Returning array of arrays to testUpdate
+     * @return array
+     */
+    public function providertestUpdate()
+    {
+        return array(array("teacher",NULL),array("student",NULL));
+    }
+    /**
+     * Test Update of DBAL
+     * @param string $modelname
+     * @param mixed $val
+     * @dataProvider providertestUpdate
+     */
+    public function testUpdate($modelname,$val)
+    {
+        $obj= new BaseController($modelname);
+        $this->assertEquals(false, $obj->edit($modelname, $val));
+    }
+    /**
+     * Returning array of arrays to testDelete
+     * @return array
+     */
+    public function providertestDelete()
+    {
+        return array(array("teacher",NULL),array("student",NULL));
+    }
+    /**
+     * Test Delete of DBAL
+     * @param string $modelname
+     * @dataProvider providertestDelete
+     */
+    public function testDelete($modelname,$val)
+    {
+        $obj= new BaseController($modelname);
+        $this->assertEquals(false, $obj->delete($modelname, $val));
+    }
+}

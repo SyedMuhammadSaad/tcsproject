@@ -11,15 +11,25 @@ class ControllerFactory
     /**
      * Factory Method implemented
      * @param string $type Type of button pressed is passed here to select controller
-     * @return \core\controllers\className Returns StudentController or TeacherController or CourseController
+     * @return \core\controllers\className Returns StudentController or TeacherController or CourseController or HomeController or DefaultController
      */
     public static function createController($type) 
     {
-        $className = 'app'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
         if(isset($type))
         {
+            if($type!="default" && $type!="home")
+            {
+                $className = 'app'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
+
+            }
+            else
+            {
+                $className = 'core'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
+
+            }
             return new $className($type);
         }
+        
         else if($className=="Controller")//if no controller is set
         {
             echo "$className Not Found!";

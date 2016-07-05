@@ -3,7 +3,6 @@
 /**
  * Testing Rquest
  */
-//require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
 use core\util\Request;
 /**
  * requesTest class tests the request.php
@@ -27,7 +26,7 @@ class requestTest extends PHPUnit_Framework_TestCase
     {
         
         $val=new \app\controllers\TeacherController("teacher");
-        $this->assertEquals($val,$obj=new core\util\Request($opr, $type));
+        $this->assertEquals($val,$obj=new Request($opr, $type));
     }
 }
 

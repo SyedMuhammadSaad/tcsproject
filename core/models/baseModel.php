@@ -25,7 +25,8 @@ class BaseModel implements ModelInterface
     function __construct($type) {
         $dest=  ucfirst($type);
         require_once Root.d_S.'app'.d_S.'models'.d_S.'metadata'.d_S.'Meta'.$dest.'.php';
-        $temp=  metadata();
+        $metatype="meta$type";
+        $temp=  $metatype();
         self::__set("attr",$temp[0]);
     }
     /**

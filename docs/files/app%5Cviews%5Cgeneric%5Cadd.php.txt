@@ -1,12 +1,9 @@
-<html>
-    <body>
+
         <h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index Page</a></h4>
 
         
-        <form action="index.php" method="post">
-        Value: <br> <input type="text" name="parameter[0]"><br>
         <?php
-        $col=$modl->getAttr();
+        $col=$modl->__get("attr");
         echo '<i>Columns are|';
         for($i=0;$i<sizeof($col);$i++)
         {
@@ -16,10 +13,10 @@
         ?>
         <br>
         Column: <br><input type="text" name="parameter[1]"><br>
+        Value: <br> <input type="text" name="parameter[0]"><br>
+        <input type="text" value="<?php echo $func;?>" style="display:none;" name="modelname">
+        <input type="text" value="<?php echo $opr;?>" style="display:none;" name="crud">
         <input type="submit">
-        <input type="text" value="<?php echo buttonval;?>" style="display:none;" name="modelname">
-        <input type="text" value="<?php echo crudval;?>" style="display:none;" name="crudname">
-      </form>
-    </body>
-</html>
+        
+      
 

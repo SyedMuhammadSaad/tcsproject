@@ -2,7 +2,6 @@
 /**
  * Testing ModelFactory
  */
-//require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
 use core\models\ModelFactory;
 
 /**

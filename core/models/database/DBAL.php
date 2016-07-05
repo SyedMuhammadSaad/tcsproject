@@ -2,14 +2,7 @@
 /**
  * Database connection formed with insert,update,delete and select queries
  */
-/**
- * Namespace declared here
- */
 namespace core\models\database;
-
-
-//global $dbcon;
-
 /**
  * DBAL singleton class connects with PDO database
  */
@@ -61,6 +54,7 @@ class DBAL
      * @param string $modelname The name of model
      * @param string $column The name of the column
      * @param mixed $value1 The value to be inserted
+     * @return string Error Message
      */
     public function insert($modelname,$column,$value1)
     {
@@ -70,9 +64,10 @@ class DBAL
         {
             DBAL::connect()->prepare($insertquery)->execute([$value1]);
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
-            echo "An error occurred!<br>".$e->getMessage();
+            echo $e->getMessage()."<br>";
+            return "An error occurred!";
         }
         
     }
@@ -110,6 +105,7 @@ class DBAL
      * @param string $value2 Column name
      * @param mixed $newvalue New Value
      * @param mixed $oldvalue Value to be updated
+     * @return string Error Message
      */
     public function update($modelname,$value1,$value2,$newvalue,$oldvalue)
     {
@@ -119,9 +115,10 @@ class DBAL
         {
             DBAL::connect()->prepare($update_query)->execute([$newvalue,$oldvalue]);
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
-            echo "An error occurred!<br>".$e->getMessage();
+            echo $e->getMessage()."<br>";
+            return "An error occurred!";
         }
     }
     /**
@@ -129,6 +126,7 @@ class DBAL
      * @param string $modelname Table name
      * @param string $col Column name
      * @param mixed $value Value to be deleted
+     * @return string Error Message
      */
     public function delete($modelname,$col,$value)
     {
@@ -138,9 +136,10 @@ class DBAL
         {
             DBAL::connect()->prepare($delete_query)->execute([$value]);
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
-            echo "An error occurred!<br>".$e->getMessage();
+            echo $e->getMessage()."<br>";
+            return "An error occurred!";
         }
     }
 }

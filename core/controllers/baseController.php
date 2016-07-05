@@ -18,7 +18,7 @@ class BaseController implements ControllerInterface
      * Sets the model according to controller
      * @var |\StudentModel|\TeacherModel|\CourseModel 
      */
-    private $model;
+    public $model;
     /**
      * Setting the modeltype required
      * @param string $typeofModel
@@ -36,16 +36,19 @@ class BaseController implements ControllerInterface
      * Home or Default Controller ses this function
      * @param string $val home or default
      * @param mixed $buttonvalue This value is passed in case of DefaultController
+     * @return boolean Returns True for checking
      */
     public function call($val,$buttonvalue = NULL) 
     {
         $controller=$val;
         require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
+        return true;
     }
     /**
      * Selects the operation and calls the view accordingly
      * @param string $opr CRUD
      * @param string $func Teacher, Student or Course
+     * @return boolean Returns True for checking
      */
     function operation($opr,$func)
     {
@@ -54,7 +57,7 @@ class BaseController implements ControllerInterface
             $count=$this->read($func);
         }
         require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
-        
+        return true;
     }
     /**
      * Add function calls the respective controller create function
