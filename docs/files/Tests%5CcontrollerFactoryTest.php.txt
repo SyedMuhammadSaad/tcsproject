@@ -2,6 +2,9 @@
 /**
  * Testing ControllerFactory
  */
+/**
+ * Requiring index.php for testing purpose
+ */
 require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
 use core\controllers\ControllerFactory;
 /**

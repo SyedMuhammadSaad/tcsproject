@@ -6,13 +6,18 @@
  * Namespace used and declared
  */
 namespace core\models;
-use core\models\database\DBAL;
 use core\models\ModelInterface;
+use app\Config;
 /**
  * BaseModel implements from ModelInterface and defines all the functions
  */
 class BaseModel implements ModelInterface
 {
+    /**
+     * dbobj is the DatabaseConnection object
+     * @var mixed 
+     */
+    private $dbobj;
     /**
      *
      * @var array Array of attributes in model
@@ -22,7 +27,10 @@ class BaseModel implements ModelInterface
      * Constructor setting attributes in array $attr
      * @param string $type
      */
-    function __construct($type) {
+    function __construct($type) 
+    {
+        $DALName= "core\models\database\\".Config::$dbcon['DAL'];
+        $this->dbobj=new $DALName;
         $dest=  ucfirst($type);
         require_once Root.d_S.'app'.d_S.'models'.d_S.'metadata'.d_S.'Meta'.$dest.'.php';
         $metatype="meta$type";
@@ -52,7 +60,7 @@ class BaseModel implements ModelInterface
      */
     function create($tablename,$column1)
     {
-        DBAL::insert("$tablename",$column1,$this->__get($column1));
+        $this->dbobj->insert("$tablename",$column1,$this->__get($column1));
     }
     /**
      * Read model
@@ -60,7 +68,7 @@ class BaseModel implements ModelInterface
      */
     function read($tablename)
     {
-        return DBAL::select("$tablename");
+        return $this->dbobj->select("$tablename");
     }
     /**
      * Update model
@@ -70,7 +78,7 @@ class BaseModel implements ModelInterface
      */
     function update($tablename,$column1,$column2)
     {
-        DBAL::update("$tablename",$column1,$column2,$this->__get($column1),$this->__get($column2));
+        $this->dbobj->update("$tablename",$column1,$column2,$this->__get($column1),$this->__get($column2));
     }
     /**
      * Delete model
@@ -79,7 +87,7 @@ class BaseModel implements ModelInterface
      */
     function delete($tablename,$column)
     {
-        DBAL::delete("$tablename",$column,$this->__get($column));
+        $this->dbobj->delete("$tablename",$column,$this->__get($column));
     }
 }
 

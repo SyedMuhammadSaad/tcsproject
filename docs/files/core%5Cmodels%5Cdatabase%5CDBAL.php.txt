@@ -1,145 +1,51 @@
 <?php
 /**
- * Database connection formed with insert,update,delete and select queries
+ * DBAL is an abstract class
  */
 namespace core\models\database;
 /**
- * DBAL singleton class connects with PDO database
+ * DBAL contains empty functions of insert read update delete
  */
 class DBAL
 {
     /**
-     * Empty constructor
-     */
-    private function __construct()
-    {    
-    }
-    /**
-     * Empty clone funciton
-     */
-    public function __clone()
-    {    
-    }
-    /**
-     * Empty wakeup function
-     */
-    public function __wakeup()
-    {
-    }
-    /**
-     *connection made to connect to database
-     * @var PhpPlatform 
-     */
-    private static $connection=null;
-    /**
-     * connect() connects with database
-     * @return PhpPlatform
-     */
-    public static function connect()
-    {
-        require_once Root.d_S.'app'.d_S.'config.php';
-        if (self::$connection==null) 
-        {
-            $opt = [
-                \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-                \PDO::ATTR_EMULATE_PREPARES   => false
-            ];
-            self::$connection=new \PDO($dbcon['DB_TYPE'].':host='.$dbcon['DB_HOST'].';dbname='.$dbcon['DB_NAME'],$dbcon['DB_USER'],$dbcon['DB_PASSWORD'],$opt);
-        }
-        return self::$connection;
-    }
-    
-    /**
-     * Insertion command executes here
-     * @param string $modelname The name of model
-     * @param string $column The name of the column
-     * @param mixed $value1 The value to be inserted
-     * @return string Error Message
+     * Insert function
+     * @param string $modelname
+     * @param string $column
+     * @param mixed $value1
      */
     public function insert($modelname,$column,$value1)
     {
-        DBAL::connect();
-        $insertquery="INSERT INTO {$modelname} ({$column}) VALUES (?);";
-        try
-        {
-            DBAL::connect()->prepare($insertquery)->execute([$value1]);
-        }
-        catch(\PDOException $e)
-        {
-            echo $e->getMessage()."<br>";
-            return "An error occurred!";
-        }
         
     }
-    
     /**
-     * Select all the table
-     * @param string $modelname Table name
-     * @return array Array of table values
+     * Select function
+     * @param string $modelname
      */
     public function select($modelname)
-    {   
-        DBAL::connect();
-        $result1 = DBAL::connect()->prepare("select * from $modelname limit 1");
-        $result1->execute();
-        $fields = array_keys($result1->fetch(\PDO::FETCH_ASSOC));
-        $selectquery="SELECT * FROM $modelname";
-        $result=DBAL::connect()->prepare($selectquery);
-        $result->execute();
-        $col=0;
-        $arr=array();//$arr is 2D array and it will store the values of table
-        foreach($result->fetchAll(\PDO::FETCH_ASSOC) as $row)
-        {
-            for($col=0;$col<$result->columnCount();$col++)
-            {
-                $arr1[$col]=$row[$fields[$col]];
-            }
-            array_push($arr,$arr1);
-        }
-        return $arr;//retruning the values of table.
+    {
+        
     }
     /**
-     * Update Table
-     * @param string $modelname Table name
-     * @param string $value1 Column name
-     * @param string $value2 Column name
-     * @param mixed $newvalue New Value
-     * @param mixed $oldvalue Value to be updated
-     * @return string Error Message
+     * Update function
+     * @param string $modelname
+     * @param string $value1
+     * @param string $value2
+     * @param mixed $newvalue
+     * @param mixed $oldvalue
      */
     public function update($modelname,$value1,$value2,$newvalue,$oldvalue)
     {
-        DBAL::connect();
-        $update_query="UPDATE $modelname SET $value1 = ? WHERE $value2 = ?";
-        try
-        {
-            DBAL::connect()->prepare($update_query)->execute([$newvalue,$oldvalue]);
-        }
-        catch(\PDOException $e)
-        {
-            echo $e->getMessage()."<br>";
-            return "An error occurred!";
-        }
+        
     }
     /**
-     * Delete table
-     * @param string $modelname Table name
-     * @param string $col Column name
-     * @param mixed $value Value to be deleted
-     * @return string Error Message
+     * delete function
+     * @param string $modelname
+     * @param string $column
+     * @param mixed $value
      */
-    public function delete($modelname,$col,$value)
+    public function delete($modelname,$column,$value)
     {
-        DBAL::connect();
-        $delete_query="DELETE FROM $modelname WHERE $col = ?";
-        try
-        {
-            DBAL::connect()->prepare($delete_query)->execute([$value]);
-        }
-        catch(\PDOException $e)
-        {
-            echo $e->getMessage()."<br>";
-            return "An error occurred!";
-        }
+        
     }
 }

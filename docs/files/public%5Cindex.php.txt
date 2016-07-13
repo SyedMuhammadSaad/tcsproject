@@ -16,7 +16,6 @@ define("d_S",DIRECTORY_SEPARATOR);
  */
 use core\util\Request;//using namespace from request.php
 use core\controllers\ControllerFactory;
-use core\controllers\BaseController;
 
 /**
  * Including files
@@ -41,39 +40,9 @@ function __autoload($class_name)
             require_once $file;
         }
 }
+$req=new Request();
 $contrlfactoryobj= new ControllerFactory;
-if(isset($_REQUEST['crud'])||isset($_REQUEST['buttonchoice']))
-{
-    if(isset($_REQUEST['crud']))
-    {
-        
-        $req=new Request($_REQUEST['crud'],$_REQUEST['modelname']);//object of request class setting values of operation and buttonvalue
-        $crudvalue=$req->crud;
-        
-        $contrlfactory=$contrlfactoryobj->createController($req->table);//making object of specific controller
-        if(isset($contrlfactory))
-        {
-            $contrlfactory->operation($req->crud,$req->table);//calling operation which will call related view file
-        }
-        if(isset($_REQUEST['parameter']))
-        {
-            $req->parameters=$_REQUEST['parameter'];
-            $obj= new BaseController("$req->table");
-            $obj->$crudvalue($req->table,$req->parameters);//basecontroller object calling generic fucntions according $crud value
-
-        }
-    }
-    if(isset($_REQUEST['buttonchoice']))
-    {
-        $buttonvalue=$_REQUEST['buttonchoice'];
-        $contrlfactory=$contrlfactoryobj->createController("default");//making default controller object
-        $contrlfactory->call("default",$buttonvalue);
-    }
-}
-else
-{
-    $contrlfactory=$contrlfactoryobj->createController("home");//making home controller object
-    $contrlfactory->call("home");
-}
-//$req=new Request($crudvalue,$buttonvalue);//object of request class setting values of operation and buttonvalue
+$contrlfactory=$contrlfactoryobj->createController($req->entity);
+$contrlfactory->_action($req);
+//var_dump($req);
 ?>

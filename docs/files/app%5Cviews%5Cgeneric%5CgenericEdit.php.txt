@@ -20,6 +20,6 @@ for($i=0;$i<sizeof($col);$i++)
 }
 echo 'Old Value: <input type="text" name="parameter[3]"><br>';
 echo '<input type="submit">
-    <input type="text" value="'.$func.'" style="display:none;" name="modelname">
-    <input type="text" value="'.$opr.'" style="display:none;" name="crud">
+    <input type="text" value="'.$func.'" style="display:none;" name="entity">
+    <input type="text" value="'.$opr.'" style="display:none;" name="action">
     ';

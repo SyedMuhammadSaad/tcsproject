@@ -6,7 +6,7 @@
  * Including header
  */
 require_once Root.d_S.'app'.d_S.'views'.d_S.'layouts'.d_S.'header.php';
-if(isset($opr))
+if(isset($opr) && $opr!=NULL)
 {
     $modl=$this->model;
     if($opr=="add")//if add then calls the generic add view
@@ -17,10 +17,6 @@ if(isset($opr))
     {
         require_once Root.d_S.'app'.d_S.'views'.d_S.$func.d_S.$opr.'.php';
     }
-}
-if(isset($controller)&& $controller=="home")
-{
-    require_once Root.d_S.'core'.d_S.'views'.d_S.'home.php';
 }
 if(isset($controller)&& $controller=="default")
 {

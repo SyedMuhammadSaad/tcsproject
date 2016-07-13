@@ -1,0 +1,66 @@
+<?php
+/**
+ * PDODriver making connection
+ */
+namespace core\models\database\drivers\pdo;
+use app\Config;
+/**
+ * PDODriver making connection and has execute function which rea or write files
+ */
+class PDODriver
+{
+    /**
+     * Empty constructor
+     */
+    private function __construct()
+    {    
+    }
+    /**
+     * Empty clone funciton
+     */
+    public function __clone()
+    {    
+    }
+    /**
+     * Empty wakeup function
+     */
+    public function __wakeup()
+    {
+    }
+    /**
+     *connection made to connect to database
+     * @var PhpPlatform 
+     */
+    private static $connection=null;
+    /**
+     * connect() connects with database
+     * @return PhpPlatform
+     */
+    public static function connect()
+    {
+        //require_once Root.d_S.'app'.d_S.'config.php';
+        if (self::$connection==null) 
+        {
+            $opt = [
+                \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_EMULATE_PREPARES   => false
+            ];
+            self::$connection=new \PDO(Config::$dbcon['DB_TYPE'].':host='.Config::$dbcon['DB_HOST'].';dbname='.Config::$dbcon['DB_NAME'],Config::$dbcon['DB_USER'],Config::$dbcon['DB_PASSWORD'],$opt);
+        }
+        return self::$connection;
+    }
+    
+    /**
+     * Execute function prepares and executes the query
+     * @param mixed $pdoconnect
+     * @param string $query
+     * @param mixed $val
+     * @return mixed
+     */
+    public function execute($pdoconnect,$query,$val=NULL)
+    {
+        $tempconnect=$pdoconnect->prepare("$query");
+        $tempconnect->execute($val);
+        return $tempconnect;
+    }
+}

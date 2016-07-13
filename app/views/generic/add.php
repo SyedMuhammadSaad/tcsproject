@@ -14,8 +14,8 @@
         <br>
         Column: <br><input type="text" name="parameter[1]"><br>
         Value: <br> <input type="text" name="parameter[0]"><br>
-        <input type="text" value="<?php echo $func;?>" style="display:none;" name="modelname">
-        <input type="text" value="<?php echo $opr;?>" style="display:none;" name="crud">
+        <input type="text" value="<?php echo $func;?>" style="display:none;" name="entity">
+        <input type="text" value="<?php echo $opr;?>" style="display:none;" name="action">
         <input type="submit">
         
       
