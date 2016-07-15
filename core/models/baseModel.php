@@ -7,12 +7,16 @@
  */
 namespace core\models;
 use core\models\ModelInterface;
-use app\Config;
 /**
  * BaseModel implements from ModelInterface and defines all the functions
  */
 class BaseModel implements ModelInterface
 {
+    /**
+     * Model Name is saved here
+     * @var string Name of model
+     */
+    public $nameofmodel;
     /**
      * dbobj is the DatabaseConnection object
      * @var mixed 
@@ -29,8 +33,11 @@ class BaseModel implements ModelInterface
      */
     function __construct($type) 
     {
-        $DALName= "core\models\database\\".Config::$dbcon['DAL'];
+        require_once Root.d_S.'app'.d_S.'config.php';
+        global $dbcon;
+        $DALName= "core\models\database\\".$dbcon['DAL'];
         $this->dbobj=new $DALName;
+        $this->nameofmodel=$type;
         $dest=  ucfirst($type);
         require_once Root.d_S.'app'.d_S.'models'.d_S.'metadata'.d_S.'Meta'.$dest.'.php';
         $metatype="meta$type";
@@ -42,7 +49,7 @@ class BaseModel implements ModelInterface
      * @param string $name
      * @param mixed $value
      */
-    function __set($name, $value) {
+    function __set($name, $value=NULL) {
         $this->$name=$value;
     }
     /**
@@ -55,39 +62,42 @@ class BaseModel implements ModelInterface
     }
     /**
      * Create model
-     * @param string $tablename
-     * @param string $column1
+     * @param array $column
      */
-    function create($tablename,$column1)
+    function create($column)
     {
-        $this->dbobj->insert("$tablename",$column1,$this->__get($column1));
+        $this->dbobj->insert("$this->nameofmodel",$column[2],$this->__get($column[2]));
     }
     /**
      * Read model
-     * @param string $tablename
      */
-    function read($tablename)
+    function read($column = NULL)
     {
-        return $this->dbobj->select("$tablename");
+        return $this->dbobj->select("$this->nameofmodel");
     }
     /**
      * Update model
-     * @param string $tablename
-     * @param string $column1
-     * @param string $column2
+     * @param array $column
      */
-    function update($tablename,$column1,$column2)
+    function update($column)
     {
-        $this->dbobj->update("$tablename",$column1,$column2,$this->__get($column1),$this->__get($column2));
+        $this->dbobj->update("$this->nameofmodel",$column[0],$column[1],$this->__get($column[0]),$this->__get($column[1]));
     }
     /**
      * Delete model
-     * @param string $tablename
-     * @param string $column
+     * @param array $column
      */
-    function delete($tablename,$column)
+    function delete($column)
     {
-        $this->dbobj->delete("$tablename",$column,$this->__get($column));
+        $this->dbobj->delete("$this->nameofmodel",$column[0],$this->__get($column[0]));
+    }
+    /**
+     * Returns last ID
+     * @return string
+     */
+    function lastID()
+    {
+        return $this->dbobj->getlastid("$this->nameofmodel");
     }
 }
 

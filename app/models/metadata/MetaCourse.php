@@ -12,15 +12,17 @@ function metacourse()
     return array(
         array(
             //Attributes
-            'CourseName','CourseCode'
+            'ID','CourseName','CourseCode'
         ),
         array(
             //datatypes
+            'ID'=>'INT',
             'CourseName'=>'VARCHAR',
             'CourseCode'=>'INT'
         ),
         array(
             //numeric
+            'ID',
             'CourseCode'
         )
     );

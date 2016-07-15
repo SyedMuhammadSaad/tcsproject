@@ -41,8 +41,6 @@ function __autoload($class_name)
         }
 }
 $req=new Request();
-$contrlfactoryobj= new ControllerFactory;
-$contrlfactory=$contrlfactoryobj->createController($req->entity);
-$contrlfactory->_action($req);
-//var_dump($req);
+$contrlfactoryobj= ControllerFactory::createController($req->entity);
+$contrlfactoryobj->_action($req);
 ?>

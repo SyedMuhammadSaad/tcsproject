@@ -12,16 +12,18 @@ function metastudent()
     return array(
         array(
             //Attributes
-            'Name','Age','Degree'
+            'ID','Name','Age','Degree'
         ),
         array(
             //datatypes
+            'ID'=>'INT',
             'Name'=>'VARCHAR',
             'Age'=>'INT',
             'Degree'=>'VARCHAR'
         ),
         array(
             //numeric
+            'ID',
             'Age'
         )
     );

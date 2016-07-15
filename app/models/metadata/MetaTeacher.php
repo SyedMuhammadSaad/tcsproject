@@ -11,16 +11,18 @@ function metateacher()
    return array(
        array(
            //Attributes
-           'Name','Age','Course'
+           'ID','Name','Age','Course'
        ),
        array(
            //datatypes
+           'ID',
            'Name'=>'VARCHAR',
            'Age'=>'INT',
            'Course'=>'VARCHAR'
        ),
        array(
            //numeric
+           'ID',
            'Age'
        )
    );

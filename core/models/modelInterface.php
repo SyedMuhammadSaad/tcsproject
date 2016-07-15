@@ -10,28 +10,27 @@ interface ModelInterface
 {
    /**
      * Create model
-     * @param string $tablename
-     * @param string $column1
+     * @param array $column
      */
-    function create($tablename,$column1);
+    function create($column);
     /**
      * Read model
-     * @param string $tablename
      */
-    function read($tablename);
+    function read($param = NULL);
     /**
      * Update model
-     * @param string $tablename
-     * @param string $column1
-     * @param string $column2
+     * @param array $column
      */
-    function update($tablename,$column1,$column2);
+    function update($column);
     /**
      * Delete model
-     * @param string $tablename
-     * @param string $column
+     * @param array $column
      */
-    function delete($tablename,$column);
+    function delete($column);
+    /**
+     * Gets the last ID
+     */
+    function lastID();
 }
 
 ?>

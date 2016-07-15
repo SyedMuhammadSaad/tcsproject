@@ -13,11 +13,11 @@ class ControllerFactory
      * @param string $type Type of button pressed is passed here to select controller
      * @return \core\controllers\className Returns StudentController or TeacherController or CourseController or HomeController or DefaultController
      */
-    public static function createController($type) 
+    public static function createController($type='default') 
     {
         if(isset($type))
         {
-            if($type!="default" && $type!="home")
+            if($type!="default")
             {
                 $className = 'app'.d_S.'controllers'.d_S.ucfirst($type)."Controller";
 

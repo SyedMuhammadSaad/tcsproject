@@ -21,13 +21,11 @@ class PDO extends DBAL
      */
     public function insert($modelname,$column,$value1)
     {
-        PDODriver::connect();
         $insertquery="INSERT INTO {$modelname} ({$column}) VALUES (?);";
         try
         {
-            $pdoconnection=PDODriver::connect();
             $values=array($value1);
-            PDODriver::execute($pdoconnection,$insertquery,$values);
+            PDODriver::execute($insertquery,$values);
         }
         catch(\PDOException $e)
         {
@@ -43,16 +41,12 @@ class PDO extends DBAL
      * @return array Array of table values
      */
     public function select($modelname)
-    {   
-        PDODriver::connect();
-        $result1 = PDODriver::connect();
+    {
         $query1="select * from $modelname limit 1";
-        $returnresult1=PDODriver::execute($result1,$query1);
-        //$result1->execute();
+        $returnresult1=PDODriver::execute($query1);
         $fields = array_keys($returnresult1->fetch(\PDO::FETCH_ASSOC));
         $selectquery="SELECT * FROM $modelname";
-        $result=PDODriver::connect();
-        $returnresult=PDODriver::execute($result,$selectquery);
+        $returnresult=PDODriver::execute($selectquery);
         $col=0;
         $arr=array();//$arr is 2D array and it will store the values of table
         foreach($returnresult->fetchAll(\PDO::FETCH_ASSOC) as $row)
@@ -76,13 +70,11 @@ class PDO extends DBAL
      */
     public function update($modelname,$value1,$value2,$newvalue,$oldvalue)
     {
-        PDODriver::connect();
         $update_query="UPDATE $modelname SET $value1 = ? WHERE $value2 = ?";
         try
         {
-            $pdoconnection=PDODriver::connect();
             $values=array($newvalue,$oldvalue);
-            PDODriver::execute($pdoconnection,$update_query,$values);
+            PDODriver::execute($update_query,$values);
         }
         catch(\PDOException $e)
         {
@@ -99,18 +91,29 @@ class PDO extends DBAL
      */
     public function delete($modelname,$col,$value)
     {
-        PDODriver::connect();
         $delete_query="DELETE FROM $modelname WHERE $col = ?";
         try
         {
-            $pdoconnection=PDODriver::connect();
             $values=array($value);
-            PDODriver::execute($pdoconnection,$delete_query,$values);
+            PDODriver::execute($delete_query,$values);
         }
         catch(\PDOException $e)
         {
             echo $e->getMessage()."<br>";
             return "An error occurred!";
         }
+    }
+    /**
+     * Getting last ID
+     * @param string $modelname
+     * @return string
+     */
+    public function getlastid($modelname)
+    {
+        $querycountid="SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '$modelname'";
+        $row=PDODriver::execute($querycountid);
+        $result=$row->fetch();
+        $id=$result['AUTO_INCREMENT'];
+        return "Last ID was ".$id;
     }
 }

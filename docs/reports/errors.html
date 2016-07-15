@@ -68,12 +68,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">61</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">67</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -103,7 +103,8 @@
                                                                                                                                                             <li><a href="#app\views\layouts\header.php"><i class="icon-file"></i> app\views\layouts\header.php</a></li>
                                                                                                                                                                                                                                                                                                                                     <li><a href="#app\views\layouts\footer.php"><i class="icon-file"></i> app\views\layouts\footer.php</a></li>
                                                                                                                                                             <li><a href="#core\models\database\drivers\pdo\pdodriver.php"><i class="icon-file"></i> core\models\database\drivers\pdo\pdodriver.php</a></li>
-                                                                                                                                                                                                                    <li><a href="#Tests\modelFactoryTest.php"><i class="icon-file"></i> Tests\modelFactoryTest.php</a></li>
+                                                                                                    <li><a href="#core\views\viewmanager.php"><i class="icon-file"></i> core\views\viewmanager.php</a></li>
+                                                                                                                                                            <li><a href="#Tests\modelFactoryTest.php"><i class="icon-file"></i> Tests\modelFactoryTest.php</a></li>
                                                                                                     <li><a href="#app\views\layouts\default.php"><i class="icon-file"></i> app\views\layouts\default.php</a></li>
                                                                                                     <li><a href="#core\models\baseModel.php"><i class="icon-file"></i> core\models\baseModel.php</a></li>
                                                                                                                                                                                                                                                                             <li><a href="#public\index.php"><i class="icon-file"></i> public\index.php</a></li>
@@ -115,6 +116,7 @@
                                                                                                                                                                                                                     <li><a href="#app\views\generic\add.php"><i class="icon-file"></i> app\views\generic\add.php</a></li>
                                                                                                     <li><a href="#Tests\controllerFactoryTest.php"><i class="icon-file"></i> Tests\controllerFactoryTest.php</a></li>
                                                                                                                                                                                                                     <li><a href="#core\controllers\baseController.php"><i class="icon-file"></i> core\controllers\baseController.php</a></li>
+                                                                                                    <li><a href="#core\views\error.php"><i class="icon-file"></i> core\views\error.php</a></li>
                                                                                                     <li><a href="#core\controllers\controllerInterface.php"><i class="icon-file"></i> core\controllers\controllerInterface.php</a></li>
                                                                                                     <li><a href="#Tests\baseModelTest.php"><i class="icon-file"></i> Tests\baseModelTest.php</a></li>
                                                                                                     <li><a href="#core\models\database\pdo.php"><i class="icon-file"></i> core\models\database\pdo.php</a></li>
@@ -305,14 +307,58 @@
                                 <tbody>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>60</td>
-                                        <td>Argument $pdoconnect is missing from the Docblock of execute</td>
+                                        <td>59</td>
+                                        <td>Argument $query is missing from the Docblock of execute</td>
                                     </tr>
                                                             </tbody>
                             </table>
                         </div>
                                     </div>
                             <div class="package-contents">
+                                            <a name="core\views\viewmanager.php" id="core\views\viewmanager.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            core\views\viewmanager.php
+                            <small style="float: right;padding-right: 10px;">5</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>7</td>
+                                        <td>No summary for class &quot;&quot;</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>9</td>
+                                        <td>Argument $parameters is missing from the Docblock of display</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>9</td>
+                                        <td>No summary for method &quot;&quot;</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>29</td>
+                                        <td>Argument $parameters is missing from the Docblock of pages</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>29</td>
+                                        <td>No summary for method &quot;&quot;</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
                                     </div>
                             <div class="package-contents">
                                     </div>
@@ -387,38 +433,38 @@
                                 <tbody>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>30</td>
+                                        <td>34</td>
                                         <td>Argument $type is missing from the Docblock of __construct</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>45</td>
+                                        <td>52</td>
                                         <td>Argument $name is missing from the Docblock of __set</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>53</td>
+                                        <td>60</td>
                                         <td>Argument $name is missing from the Docblock of __get</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>61</td>
-                                        <td>Argument $tablename is missing from the Docblock of create</td>
+                                        <td>67</td>
+                                        <td>Argument $column is missing from the Docblock of create</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>69</td>
-                                        <td>Argument $tablename is missing from the Docblock of read</td>
+                                        <td>74</td>
+                                        <td>Argument $column is missing from the Docblock of read</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>79</td>
-                                        <td>Argument $tablename is missing from the Docblock of update</td>
+                                        <td>82</td>
+                                        <td>Argument $column is missing from the Docblock of update</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>88</td>
-                                        <td>Argument $tablename is missing from the Docblock of delete</td>
+                                        <td>90</td>
+                                        <td>Argument $column is missing from the Docblock of delete</td>
                                     </tr>
                                                             </tbody>
                             </table>
@@ -578,23 +624,23 @@
                                 <tbody>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>16</td>
-                                        <td>Argument $tablename is missing from the Docblock of create</td>
+                                        <td>15</td>
+                                        <td>Argument $column is missing from the Docblock of create</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>21</td>
-                                        <td>Argument $tablename is missing from the Docblock of read</td>
+                                        <td>19</td>
+                                        <td>Argument $param is missing from the Docblock of read</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>28</td>
-                                        <td>Argument $tablename is missing from the Docblock of update</td>
+                                        <td>24</td>
+                                        <td>Argument $column is missing from the Docblock of update</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>34</td>
-                                        <td>Argument $tablename is missing from the Docblock of delete</td>
+                                        <td>29</td>
+                                        <td>Argument $column is missing from the Docblock of delete</td>
                                     </tr>
                                                             </tbody>
                             </table>
@@ -698,7 +744,7 @@
                         <h3>
                             <i class="icon-file"></i>
                             core\controllers\baseController.php
-                            <small style="float: right;padding-right: 10px;">7</small>
+                            <small style="float: right;padding-right: 10px;">6</small>
                         </h3>
                         <div>
                             <table class="table markers table-bordered">
@@ -712,38 +758,59 @@
                                 <tbody>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>31</td>
+                                        <td>27</td>
                                         <td>Argument $typeofModel is missing from the Docblock of __construct</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>44</td>
+                                        <td>39</td>
                                         <td>Argument $obj is missing from the Docblock of _action</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>65</td>
-                                        <td>Argument $opr is missing from the Docblock of operation</td>
-                                    </tr>
-                                                                    <tr>
-                                        <td>error</td>
-                                        <td>80</td>
+                                        <td>84</td>
                                         <td>Argument $param is missing from the Docblock of add</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>99</td>
+                                        <td>103</td>
                                         <td>Argument $param is missing from the Docblock of read</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>109</td>
+                                        <td>113</td>
                                         <td>Argument $param is missing from the Docblock of edit</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>128</td>
+                                        <td>132</td>
                                         <td>Argument $param is missing from the Docblock of delete</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="core\views\error.php" id="core\views\error.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            core\views\error.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
                                     </tr>
                                                             </tbody>
                             </table>
@@ -821,7 +888,7 @@
                         <h3>
                             <i class="icon-file"></i>
                             core\models\database\pdo.php
-                            <small style="float: right;padding-right: 10px;">4</small>
+                            <small style="float: right;padding-right: 10px;">5</small>
                         </h3>
                         <div>
                             <table class="table markers table-bordered">
@@ -840,18 +907,23 @@
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>45</td>
+                                        <td>43</td>
                                         <td>Argument $modelname is missing from the Docblock of select</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>77</td>
+                                        <td>71</td>
                                         <td>Argument $modelname is missing from the Docblock of update</td>
                                     </tr>
                                                                     <tr>
                                         <td>error</td>
-                                        <td>100</td>
+                                        <td>92</td>
                                         <td>Argument $modelname is missing from the Docblock of delete</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>111</td>
+                                        <td>Argument $modelname is missing from the Docblock of getlastid</td>
                                     </tr>
                                                             </tbody>
                             </table>
@@ -964,7 +1036,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 13th, 2016 at 12:58.
+                    on July 15th, 2016 at 13:59.
                 </section>
             </section>
         </section>

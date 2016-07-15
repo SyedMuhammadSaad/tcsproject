@@ -3,7 +3,6 @@
  * PDODriver making connection
  */
 namespace core\models\database\drivers\pdo;
-use app\Config;
 /**
  * PDODriver making connection and has execute function which rea or write files
  */
@@ -38,29 +37,37 @@ class PDODriver
      */
     public static function connect()
     {
-        //require_once Root.d_S.'app'.d_S.'config.php';
+        require_once Root.d_S.'app'.d_S.'config.php';
+        global $dbcon;
         if (self::$connection==null) 
         {
             $opt = [
                 \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_EMULATE_PREPARES   => false
             ];
-            self::$connection=new \PDO(Config::$dbcon['DB_TYPE'].':host='.Config::$dbcon['DB_HOST'].';dbname='.Config::$dbcon['DB_NAME'],Config::$dbcon['DB_USER'],Config::$dbcon['DB_PASSWORD'],$opt);
+            self::$connection=new \PDO($dbcon['DB_TYPE'].':host='.$dbcon['DB_HOST'].';dbname='.$dbcon['DB_NAME'],$dbcon['DB_USER'],$dbcon['DB_PASSWORD'],$opt);
         }
         return self::$connection;
     }
     
     /**
      * Execute function prepares and executes the query
-     * @param mixed $pdoconnect
      * @param string $query
      * @param mixed $val
      * @return mixed
      */
-    public function execute($pdoconnect,$query,$val=NULL)
+    public function execute($query,$val=NULL)
     {
+        $pdoconnect=self::connect();
         $tempconnect=$pdoconnect->prepare("$query");
         $tempconnect->execute($val);
         return $tempconnect;
+    }
+    /**
+     * Disconnection formed
+     */
+    public function disconnect()
+    {
+        self::$connection=NULL;
     }
 }

@@ -8,6 +8,7 @@
 namespace core\controllers;
 use core\controllers\ControllerInterface;
 use core\models\ModelFactory;
+use core\views\ViewManager;
 
 /**
  * BaseController implements from ControllerInterface and defines all the functions
@@ -20,18 +21,12 @@ class BaseController implements ControllerInterface
      */
     public $model;
     /**
-     * Model Name is saved here
-     * @var string Name of model
-     */
-    public $name;
-    /**
      * Setting the modeltype required
      * @param string $typeofModel
      */
     function __construct($typeofModel) 
     {
-        $this->name=$typeofModel;
-        if($typeofModel!="default" && $typeofModel!="home")
+        if($typeofModel!="default")
         {
             $obj=new ModelFactory;
             $this->model=$obj->createModel($typeofModel);
@@ -43,34 +38,43 @@ class BaseController implements ControllerInterface
      */
     function _action($obj)
     {
-        if($obj->parameters!=NULL)
+        require_once Root.d_S.'app'.d_S.'config.php';
+        global $dbcon;
+        $action=$obj->action;
+        $entity=$obj->entity;
+        $viewmanagerparameters['layout']=$dbcon['Layout'];
+        $viewmanagerparameters['action']=$action;
+        $viewmanagerparameters['entity']=$entity;
+        $viewmanagerparameters['model']=$this->model;
+        $viewmanagerparameters['error']=false;
+        if(($action != NULL || $action == 'read') && $entity == 'default')
+        {
+            $error=true;
+            $viewmanagerparameters['error']=$error;
+            ViewManager::display($viewmanagerparameters);
+        }
+        else if($obj->parameters!=NULL)
         {
             $crudvalue=$obj->action;
             $this->$crudvalue($obj->parameters);//basecontroller object calling generic fucntions according $crud value
-            $opr=$obj->action;
-            $func=$obj->entity;
-            require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
+            if(($obj->parameters[2]==NULL  || !isset($obj->parameters[0])) && !isset($obj->parameters[1]))
+            {
+                $error=true;
+                $viewmanagerparameters['error']=$error;
+            }
+            ViewManager::display($viewmanagerparameters);
         }
         else
         {
-            $this->operation($obj->action,$obj->entity);
+            $controller=$obj->entity;
+            $viewmanagerparameters['controller']=$controller;
+            if($action=="read")
+            {
+                $count=$this->read($entity);
+                $viewmanagerparameters['count']=$count;
+            }
+            ViewManager::display($viewmanagerparameters);
         }
-    }
-    /**
-     * Selects the operation and calls the view accordingly
-     * @param string $opr CRUD
-     * @param string $func Teacher, Student or Course
-     * @return boolean Returns True for checking
-     */
-    function operation($opr,$func)
-    {
-        $controller=$func;
-        if($opr=="read")
-        {
-            $count=$this->read($func);
-        }
-        require_once Root.d_S.'core'.d_S.'views'.d_S.'viewmanager.php';
-        return true;
     }
     /**
      * Add function calls the respective controller create function
@@ -79,14 +83,14 @@ class BaseController implements ControllerInterface
      */
     function add($param)
     {
-        if($param==NULL)
+        if($param[2]==NULL || $param[0]==NULL )
         {
             return false;
         }
         else
         {
-            $this->model->__set($param[1],$param[0]);
-            $this->model->create("$this->name",$param[1]);
+            $this->model->__set($param[2],$param[0]);
+            $this->model->create($param);
             return true;
         }
         
@@ -98,7 +102,7 @@ class BaseController implements ControllerInterface
      */
     function read($param = NULL)
     {
-        return $this->model->read("$this->name",$param);
+        return $this->model->read($param);
         
     }
     /**
@@ -108,7 +112,7 @@ class BaseController implements ControllerInterface
      */
     function edit($param) 
     {
-        if($param==NULL)
+        if($param[2]==NULL || $param[3]==NULL || !isset($param[0]) || !isset($param[1]))
         {
             return false;
         }
@@ -116,7 +120,7 @@ class BaseController implements ControllerInterface
         {
             $this->model->__set($param[0],$param[2]);
             $this->model->__set($param[1],$param[3]);
-            $this->model->update("$this->name",$param[0],$param[1]);
+            $this->model->update($param);
             return true;
         }
     }
@@ -127,14 +131,14 @@ class BaseController implements ControllerInterface
      */
     function delete($param) 
     {
-        if($param==NULL)
+        if($param[2]==NULL || !isset($param[0]))
         {
             return false;
         }
         else
         {
             $this->model->__set($param[0],$param[2]);
-            $this->model->delete("$this->name",$param[0]);
+            $this->model->delete($param);
             return true;
         }
     }

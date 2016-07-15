@@ -6,7 +6,7 @@ echo '<h4><a href="http://localhost/TCS_Project/public/index.php">Back to Index 
 
 $col=$modl->__get("attr");
 echo "<table><tr>";
-for($i=0;$i<sizeof($col);$i++)
+for($i=1;$i<sizeof($col);$i++)
 {
     echo '<th>'.$col[$i].'</th>';
 }
@@ -16,10 +16,10 @@ $size2=count($count[0]);
 if($size>0)
 {
 
-    for($i=0;$i<$size;$i++)
+    for($i=1;$i<$size;$i++)
     {
         echo '<tr>';
-        for($j=0;$j<$size2;$j++)
+        for($j=1;$j<$size2;$j++)
         {
             echo "<td style='text-align:left'>".$count[$i][$j]."</td>";
         }
